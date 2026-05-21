@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Rhombus, Kite and Trapezium — Ganita Prakash Grade 8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#d8d4cc;
+  --text:#1a1814;--text2:#5a5650;--text3:#9a958e;
+  --blue:#2c5f9e;--red:#c0392b;--green:#1a7a4a;--orange:#e08020;
+  --font:'DM Sans',-apple-system,sans-serif;--mono:'DM Mono',ui-monospace,monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:880px;margin:0 auto;padding:28px 20px}
+.lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
+.title{font-size:22px;font-weight:700;margin-bottom:5px}
+.subtitle{font-size:14px;color:var(--text2);margin-bottom:22px;max-width:560px;line-height:1.5}
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px}
+.tabs{display:flex;gap:4px;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:4px;margin-bottom:18px}
+.tab{flex:1;padding:8px 0;text-align:center;font-size:13px;font-weight:500;color:var(--text2);border-radius:7px;cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .12s}
+.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08);border:1.5px solid var(--border)}
+.sl-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.sl-row label{font-size:13px;font-weight:500;color:var(--text2);min-width:140px}
+.sl-row input[type=range]{flex:1;height:5px;cursor:pointer}
+.sl-val{font-family:var(--mono);font-size:15px;font-weight:700;min-width:52px;text-align:right}
+.layout{display:grid;grid-template-columns:1fr 260px;gap:16px;align-items:start}
+@media(max-width:580px){.layout{grid-template-columns:1fr}}
+canvas{display:block;width:100%;border-radius:10px;border:1.5px solid var(--border);background:#fafaf8}
+.info-panel{display:flex;flex-direction:column;gap:10px}
+.info-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;padding:12px 14px}
+.ic-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:7px}
+.ic-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid var(--border);font-size:13px}
+.ic-row:last-child{border-bottom:none;padding-bottom:0}
+.ic-row-label{color:var(--text2);font-weight:500;font-size:12.5px}
+.ic-row-val{font-family:var(--mono);font-weight:700;font-size:13.5px;color:var(--text);text-align:right}
+.insight{background:#fff8f0;border:1.5px solid #f0d8c0;border-radius:10px;padding:13px 18px;font-size:13.5px;color:#6b4400;line-height:1.65;margin-top:14px}
+.insight strong{color:#a05000}
+.insight .eq{font-family:var(--mono);font-size:13px;display:block;margin:2px 0}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="lbl">Chapter 4 · Quadrilaterals</div>
+  <div class="title">Rhombus, Kite and Trapezium</div>
+  <div class="subtitle">Explore the three remaining quadrilateral types. Drag the sliders and watch how the diagonals, angles, and parallel sides all respond to the rules of each shape.</div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" id="t0" onclick="switchTab(0)">Rhombus</button>
+      <button class="tab" id="t1" onclick="switchTab(1)">Kite</button>
+      <button class="tab" id="t2" onclick="switchTab(2)">Trapezium</button>
+    </div>
+
+    <div id="v0">
+      <div class="sl-row">
+        <label>Side length</label>
+        <input type="range" id="rSide" min="50" max="140" value="100" style="accent-color:var(--red)" oninput="renderRhombus()">
+        <span class="sl-val" style="color:var(--red)" id="rSideV">100</span>
+      </div>
+      <div class="sl-row">
+        <label>Angle A (°)</label>
+        <input type="range" id="rAng" min="20" max="160" value="60" style="accent-color:var(--orange)" oninput="renderRhombus()">
+        <span class="sl-val" style="color:var(--orange)" id="rAngV">60°</span>
+      </div>
+      <div class="layout">
+        <canvas id="rCvs" height="300"></canvas>
+        <div class="info-panel" id="rInfo"></div>
+      </div>
+      <div class="insight">
+        <strong>Rhombus:</strong> All four sides equal. The diagonals bisect each other at 90°, and each diagonal bisects its two vertex angles.
+        <span class="eq">∠A = ∠C, ∠B = ∠D, ∠A + ∠B = 180°</span>
+        A rhombus is a parallelogram — so it inherits all parallelogram properties too.
+      </div>
+    </div>
+
+    <div id="v1" style="display:none">
+      <div class="sl-row">
+        <label>AB length (top)</label>
+        <input type="range" id="kAB" min="40" max="130" value="80" style="accent-color:var(--purple,#6d28d9)" oninput="renderKite()">
+        <span class="sl-val" style="color:#6d28d9" id="kABv">80</span>
+      </div>
+      <div class="sl-row">
+        <label>CD length (bottom)</label>
+        <input type="range" id="kCD" min="50" max="160" value="120" style="accent-color:var(--purple,#6d28d9)" oninput="renderKite()">
+        <span class="sl-val" style="color:#6d28d9" id="kCDv">120</span>
+      </div>
+      <div class="sl-row">
+        <label>Top angle ∠A</label>
+        <input type="range" id="kAng" min="20" max="140" value="70" style="accent-color:var(--orange)" oninput="renderKite()">
+        <span class="sl-val" style="color:var(--orange)" id="kAngV">70°</span>
+      </div>
+      <div class="layout">
+        <canvas id="kCvs" height="300"></canvas>
+        <div class="info-panel" id="kInfo"></div>
+      </div>
+      <div class="insight">
+        <strong>Kite:</strong> Two adjacent pairs of equal sides (AB=BC, CD=DA). The "main" diagonal (from A to C) bisects the other diagonal at 90°, and bisects the angles at A and C.
+        <span class="eq">One pair of opposite angles (∠B = ∠D) are equal.</span>
+        A kite is NOT a parallelogram (opposite sides are not equal).
+      </div>
+    </div>
+
+    <div id="v2" style="display:none">
+      <div class="sl-row">
+        <label>Top side (parallel)</label>
+        <input type="range" id="tTop" min="40" max="160" value="100" style="accent-color:var(--blue)" oninput="renderTrap()">
+        <span class="sl-val" style="color:var(--blue)" id="tTopV">100</span>
+      </div>
+      <div class="sl-row">
+        <label>Bottom side (parallel)</label>
+        <input type="range" id="tBot" min="80" max="220" value="180" style="accent-color:var(--blue)" oninput="renderTrap()">
+        <span class="sl-val" style="color:var(--blue)" id="tBotV">180</span>
+      </div>
+      <div class="sl-row">
+        <label>Base angle P (°)</label>
+        <input type="range" id="tAng" min="30" max="150" value="70" style="accent-color:var(--orange)" oninput="renderTrap()">
+        <span class="sl-val" style="color:var(--orange)" id="tAngV">70°</span>
+      </div>
+      <div class="sl-row">
+        <label>Isosceles?</label>
+        <input type="checkbox" id="tIso" style="width:20px;height:20px;accent-color:var(--green)" onchange="renderTrap()">
+        <label for="tIso" style="font-size:13px;color:var(--text2)">Make left and right legs equal</label>
+      </div>
+      <div class="layout">
+        <canvas id="tCvs" height="300"></canvas>
+        <div class="info-panel" id="tInfo"></div>
+      </div>
+      <div class="insight">
+        <strong>Trapezium:</strong> At least one pair of parallel sides. Co-interior angles on the same side add to 180°.
+        <span class="eq">∠P + ∠S = 180°, ∠Q + ∠R = 180°</span>
+        In an isosceles trapezium, the two non-parallel sides are equal, and the base angles are equal (∠P = ∠Q, ∠R = ∠S).
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DEG=Math.PI/180;
+
+function switchTab(i){
+  [0,1,2].forEach(j=>{
+    document.getElementById('t'+j).classList.toggle('active',j===i);
+    document.getElementById('v'+j).style.display=j===i?'block':'none';
+  });
+  if(i===0)renderRhombus();
+  if(i===1)renderKite();
+  if(i===2)renderTrap();
+}
+
+// ── RHOMBUS ────────────────────────────────────────────────────────────────
+function renderRhombus(){
+  const side=parseInt(document.getElementById('rSide').value);
+  const angA=parseInt(document.getElementById('rAng').value);
+  document.getElementById('rSideV').textContent=side;
+  document.getElementById('rAngV').textContent=angA+'°';
+  const angB=180-angA;
+  document.getElementById('rInfo').innerHTML=`
+    <div class="info-card">
+      <div class="ic-label">Angles</div>
+      <div class="ic-row"><span class="ic-row-label">∠A = ∠C</span><span class="ic-row-val">${angA}°</span></div>
+      <div class="ic-row"><span class="ic-row-label">∠B = ∠D</span><span class="ic-row-val">${angB}°</span></div>
+      <div class="ic-row"><span class="ic-row-label">∠A + ∠B</span><span class="ic-row-val">= 180° ✓</span></div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">Sides</div>
+      <div class="ic-row"><span class="ic-row-label">All four sides</span><span class="ic-row-val">${side}</span></div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">Diagonals</div>
+      <div class="ic-row"><span class="ic-row-label">Cross at</span><span class="ic-row-val">90°</span></div>
+      <div class="ic-row"><span class="ic-row-label">Bisect each other</span><span class="ic-row-val">✓</span></div>
+      <div class="ic-row"><span class="ic-row-label">Each bisects vertex ∠</span><span class="ic-row-val">${angA/2}° + ${angA/2}°</span></div>
+    </div>`;
+  drawRhombus(side,angA);
+}
+function drawRhombus(side,angA){
+  const cvs=document.getElementById('rCvs');
+  const PR=window.devicePixelRatio||1;
+  const W=cvs.parentElement.clientWidth, H=300;
+  cvs.width=W*PR; cvs.height=H*PR; cvs.style.width=W+'px'; cvs.style.height=H+'px';
+  const ctx=cvs.getContext('2d'); ctx.scale(PR,PR);
+  ctx.fillStyle='#fafaf8'; ctx.fillRect(0,0,W,H);
+  const angR=angA*DEG;
+  const cx=W/2, cy=H/2;
+  const d1=2*side*Math.cos((90-angA/2)*DEG); // horizontal diagonal
+  const d2=2*side*Math.sin((90-angA/2)*DEG); // vertical diagonal
+  const A={x:cx,y:cy-d2/2};
+  const B={x:cx+d1/2,y:cy};
+  const C={x:cx,y:cy+d2/2};
+  const D={x:cx-d1/2,y:cy};
+  // Diagonals
+  ctx.setLineDash([5,4]); ctx.strokeStyle='#c0b8a8'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(C.x,C.y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(B.x,B.y); ctx.lineTo(D.x,D.y); ctx.stroke();
+  ctx.setLineDash([]);
+  // Right angle at center
+  const sq=8;
+  ctx.beginPath(); ctx.strokeStyle='#9a958e'; ctx.lineWidth=1.5;
+  ctx.moveTo(cx+sq,cy); ctx.lineTo(cx+sq,cy-sq); ctx.lineTo(cx,cy-sq); ctx.stroke();
+  // Shape
+  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.lineTo(C.x,C.y); ctx.lineTo(D.x,D.y); ctx.closePath();
+  ctx.fillStyle='rgba(192,57,43,.08)'; ctx.fill();
+  ctx.strokeStyle='#c0392b'; ctx.lineWidth=2.5; ctx.stroke();
+  // Labels
+  [{p:A,l:'A',dx:0,dy:-14},{p:B,l:'B',dx:14,dy:4},{p:C,l:'C',dx:0,dy:16},{p:D,l:'D',dx:-16,dy:4}].forEach(v=>{
+    ctx.font='bold 13px DM Sans'; ctx.fillStyle='#1a1814'; ctx.textAlign='center';
+    ctx.fillText(v.l, v.p.x+v.dx, v.p.y+v.dy);
+    // Angle arcs
+  });
+  // Angle labels
+  const angB=180-angA;
+  const angLabels=[{p:A,a:angA,ang:270},{p:B,a:angB,ang:0},{p:C,a:angA,ang:90},{p:D,a:angB,ang:180}];
+  angLabels.forEach(v=>{
+    const ar=v.ang*DEG;
+    ctx.font='bold 11px DM Mono'; ctx.fillStyle='#e08020'; ctx.textAlign='center';
+    ctx.fillText(v.a+'°', v.p.x+42*Math.cos(ar), v.p.y+42*Math.sin(ar));
+    ctx.beginPath(); ctx.strokeStyle='#e08020'; ctx.lineWidth=1.5;
+    ctx.arc(v.p.x,v.p.y, 22, ar-35*DEG, ar+35*DEG); ctx.stroke();
+  });
+}
+
+// ── KITE ────────────────────────────────────────────────────────────────────
+function renderKite(){
+  const ab=parseInt(document.getElementById('kAB').value);
+  const cd=parseInt(document.getElementById('kCD').value);
+  const angTop=parseInt(document.getElementById('kAng').value);
+  document.getElementById('kABv').textContent=ab;
+  document.getElementById('kCDv').textContent=cd;
+  document.getElementById('kAngV').textContent=angTop+'°';
+  // Compute angles at B and D using the kite geometry
+  const halfTop=angTop/2*DEG;
+  const h1=ab*Math.sin(halfTop), h2=cd*Math.sin(halfTop);
+  const angB=Math.round(180-2*Math.atan2(h1,ab*Math.cos(halfTop))/DEG);
+  const angC=360-angTop-2*angB; // rough
+  document.getElementById('kInfo').innerHTML=`
+    <div class="info-card">
+      <div class="ic-label">Sides</div>
+      <div class="ic-row"><span class="ic-row-label">AB = BC</span><span class="ic-row-val">${ab}</span></div>
+      <div class="ic-row"><span class="ic-row-label">CD = DA</span><span class="ic-row-val">${cd}</span></div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">Angles</div>
+      <div class="ic-row"><span class="ic-row-label">∠A (top vertex)</span><span class="ic-row-val">${angTop}°</span></div>
+      <div class="ic-row"><span class="ic-row-label">∠B = ∠D</span><span class="ic-row-val">opposite pair</span></div>
+      <div class="ic-row"><span class="ic-row-label">∠C (bottom vertex)</span><span class="ic-row-val">= 360−∠A−2∠B</span></div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">Diagonals</div>
+      <div class="ic-row"><span class="ic-row-label">AC bisects BD</span><span class="ic-row-val">at 90°</span></div>
+      <div class="ic-row"><span class="ic-row-label">AC bisects ∠A and ∠C</span><span class="ic-row-val">✓</span></div>
+    </div>`;
+  drawKite(ab,cd,angTop);
+}
+function drawKite(ab,cd,angTop){
+  const cvs=document.getElementById('kCvs');
+  const PR=window.devicePixelRatio||1;
+  const W=cvs.parentElement.clientWidth, H=300;
+  cvs.width=W*PR; cvs.height=H*PR; cvs.style.width=W+'px'; cvs.style.height=H+'px';
+  const ctx=cvs.getContext('2d'); ctx.scale(PR,PR);
+  ctx.fillStyle='#fafaf8'; ctx.fillRect(0,0,W,H);
+  const halfAng=angTop/2*DEG;
+  const cx=W/2, cy=40;
+  const A={x:cx, y:cy};
+  const B={x:cx+ab*Math.sin(halfAng), y:cy+ab*Math.cos(halfAng)};
+  const D={x:cx-ab*Math.sin(halfAng), y:cy+ab*Math.cos(halfAng)};
+  const midBD={x:cx, y:cy+ab*Math.cos(halfAng)};
+  // C is below midBD by cd*cos(halfAng)
+  const halfAngC=Math.asin(B.x-cx)/cd; // not quite right but close enough
+  const Cy=midBD.y+Math.sqrt(cd*cd-(B.x-cx)*(B.x-cx));
+  const C={x:cx, y:Math.min(Cy, H-20)};
+  // Diagonals
+  ctx.setLineDash([5,4]); ctx.strokeStyle='#c0b8a8'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(C.x,C.y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(B.x,B.y); ctx.lineTo(D.x,D.y); ctx.stroke();
+  ctx.setLineDash([]);
+  // Right angle at midBD
+  const sq=7;
+  ctx.beginPath(); ctx.strokeStyle='#9a958e'; ctx.lineWidth=1.5;
+  ctx.moveTo(cx+sq,midBD.y); ctx.lineTo(cx+sq,midBD.y-sq); ctx.lineTo(cx,midBD.y-sq); ctx.stroke();
+  // Shape
+  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.lineTo(C.x,C.y); ctx.lineTo(D.x,D.y); ctx.closePath();
+  ctx.fillStyle='rgba(109,40,217,.08)'; ctx.fill();
+  ctx.strokeStyle='#6d28d9'; ctx.lineWidth=2.5; ctx.stroke();
+  // Tick marks
+  drawT(ctx,A,B,'#6d28d9',1); drawT(ctx,B,C,'#6d28d9',1);
+  drawT(ctx,C,D,'#6d28d9',2); drawT(ctx,D,A,'#6d28d9',2);
+  // Labels
+  [{p:A,l:'A',dx:0,dy:-14},{p:B,l:'B',dx:14,dy:4},{p:C,l:'C',dx:0,dy:16},{p:D,l:'D',dx:-16,dy:4}].forEach(v=>{
+    ctx.font='bold 13px DM Sans'; ctx.fillStyle='#1a1814'; ctx.textAlign='center';
+    ctx.fillText(v.l, v.p.x+v.dx, v.p.y+v.dy);
+    ctx.beginPath(); ctx.fillStyle='#6d28d9'; ctx.arc(v.p.x,v.p.y,5,0,Math.PI*2); ctx.fill();
+  });
+  // Angle A
+  ctx.font='bold 11px DM Mono'; ctx.fillStyle='#e08020'; ctx.textAlign='center';
+  ctx.fillText(angTop+'°', cx, cy+50);
+}
+function drawT(ctx,p1,p2,color,n){
+  const mx=(p1.x+p2.x)/2,my=(p1.y+p2.y)/2;
+  const dx=p2.x-p1.x,dy=p2.y-p1.y,l=Math.sqrt(dx*dx+dy*dy);
+  const nx=-dy/l*6,ny=dx/l*6;
+  const ux=dx/l,uy=dy/l;
+  for(let k=0;k<n;k++){const o=(k-(n-1)/2)*5;ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.moveTo(mx+ux*o-nx,my+uy*o-ny);ctx.lineTo(mx+ux*o+nx,my+uy*o+ny);ctx.stroke();}
+}
+
+// ── TRAPEZIUM ───────────────────────────────────────────────────────────────
+function renderTrap(){
+  const top=parseInt(document.getElementById('tTop').value);
+  const bot=parseInt(document.getElementById('tBot').value);
+  const angP=parseInt(document.getElementById('tAng').value);
+  const iso=document.getElementById('tIso').checked;
+  document.getElementById('tTopV').textContent=top;
+  document.getElementById('tBotV').textContent=bot;
+  document.getElementById('tAngV').textContent=angP+'°';
+  const angQ=iso?angP:180-angP; // if iso, ∠Q = ∠P; else arbitrary
+  const angS=180-angP, angR=180-angQ;
+  document.getElementById('tInfo').innerHTML=`
+    <div class="info-card">
+      <div class="ic-label">Parallel sides</div>
+      <div class="ic-row"><span class="ic-row-label">PQ (top)</span><span class="ic-row-val">${top}</span></div>
+      <div class="ic-row"><span class="ic-row-label">SR (bottom)</span><span class="ic-row-val">${bot}</span></div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">Angles</div>
+      <div class="ic-row"><span class="ic-row-label">∠P</span><span class="ic-row-val">${angP}°</span></div>
+      <div class="ic-row"><span class="ic-row-label">∠Q</span><span class="ic-row-val">${iso?angQ+'° (= ∠P)':angQ+'°'}</span></div>
+      <div class="ic-row"><span class="ic-row-label">∠R</span><span class="ic-row-val">${angR}°</span></div>
+      <div class="ic-row"><span class="ic-row-label">∠S</span><span class="ic-row-val">${angS}°</span></div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">Co-interior sums</div>
+      <div class="ic-row"><span class="ic-row-label">∠S + ∠P</span><span class="ic-row-val">${angS+angP}° ✓</span></div>
+      <div class="ic-row"><span class="ic-row-label">∠R + ∠Q</span><span class="ic-row-val">${angR+angQ}° ✓</span></div>
+    </div>
+    ${iso?`<div class="info-card">
+      <div class="ic-label">Isosceles</div>
+      <div class="ic-row"><span class="ic-row-label">Legs</span><span class="ic-row-val">SP = QR</span></div>
+      <div class="ic-row"><span class="ic-row-label">Base angles</span><span class="ic-row-val">∠P = ∠Q, ∠R = ∠S</span></div>
+    </div>`:''}`;
+  drawTrap(top,bot,angP,iso,angQ);
+}
+function drawTrap(top,bot,angP,iso,angQ){
+  const cvs=document.getElementById('tCvs');
+  const PR=window.devicePixelRatio||1;
+  const W=cvs.parentElement.clientWidth, H=300;
+  cvs.width=W*PR; cvs.height=H*PR; cvs.style.width=W+'px'; cvs.style.height=H+'px';
+  const ctx=cvs.getContext('2d'); ctx.scale(PR,PR);
+  ctx.fillStyle='#fafaf8'; ctx.fillRect(0,0,W,H);
+  const bx=(W-bot)/2, by=240;
+  const h=80;
+  const tx=bx+h/Math.tan(angP*DEG);
+  const txr=iso? bx+bot-(tx-bx) : tx+top;
+  const S={x:bx,y:by}, R={x:bx+bot,y:by};
+  const P={x:tx,y:by-h}, Q={x:txr,y:by-h};
+  // Parallel mark arrows on top and bottom
+  ctx.beginPath(); ctx.moveTo(S.x,S.y); ctx.lineTo(P.x,P.y); ctx.lineTo(Q.x,Q.y); ctx.lineTo(R.x,R.y); ctx.closePath();
+  ctx.fillStyle='rgba(8,145,178,.08)'; ctx.fill();
+  ctx.strokeStyle='#0891b2'; ctx.lineWidth=2.5; ctx.stroke();
+  // Tick marks for parallel sides
+  const midTop={x:(P.x+Q.x)/2,y:(P.y+Q.y)/2}, midBot={x:(S.x+R.x)/2,y:(S.y+R.y)/2};
+  ctx.strokeStyle='#0891b2'; ctx.lineWidth=2;
+  [midTop,midBot].forEach(m=>{
+    ctx.beginPath(); ctx.moveTo(m.x-8,m.y-4); ctx.lineTo(m.x,m.y+6); ctx.lineTo(m.x+8,m.y-4); ctx.stroke();
+  });
+  if(iso){
+    drawT(ctx,S,P,'#1a7a4a',1); drawT(ctx,R,Q,'#1a7a4a',1);
+  }
+  // Angles
+  const angLabels=[{p:P,a:angP,dx:14,dy:6},{p:Q,a:iso?angQ:180-angP,dx:-14,dy:6},{p:R,a:180-(iso?angQ:180-angP),dx:-14,dy:-10},{p:S,a:180-angP,dx:14,dy:-10}];
+  angLabels.forEach((v,i)=>{
+    ctx.font='bold 11px DM Mono'; ctx.fillStyle='#e08020'; ctx.textAlign='center';
+    ctx.fillText(v.a+'°', v.p.x+v.dx*2, v.p.y+v.dy*2);
+  });
+  [{p:P,l:'P',dx:-10,dy:-10},{p:Q,l:'Q',dx:10,dy:-10},{p:R,l:'R',dx:10,dy:14},{p:S,l:'S',dx:-10,dy:14}].forEach(v=>{
+    ctx.font='bold 13px DM Sans'; ctx.fillStyle='#1a1814'; ctx.textAlign='center';
+    ctx.fillText(v.l, v.p.x+v.dx, v.p.y+v.dy);
+    ctx.beginPath(); ctx.fillStyle='#0891b2'; ctx.arc(v.p.x,v.p.y,5,0,Math.PI*2); ctx.fill();
+  });
+  // Length labels
+  ctx.font='12px DM Mono'; ctx.fillStyle='#0891b2'; ctx.textAlign='center';
+  ctx.fillText('PQ='+top, (P.x+Q.x)/2, P.y-10);
+  ctx.fillText('SR='+bot, (S.x+R.x)/2, S.y+18);
+}
+
+window.addEventListener('resize',()=>{renderRhombus();renderKite();renderTrap();});
+renderRhombus();
+</script>
+</body>
+</html>
