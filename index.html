@@ -3,389 +3,526 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Rhombus, Kite and Trapezium — Ganita Prakash Grade 8</title>
+<title>Rhombus, Kite & Trapezium — Ganita Prakash Grade 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#d8d4cc;
-  --text:#1a1814;--text2:#5a5650;--text3:#9a958e;
-  --blue:#2c5f9e;--red:#c0392b;--green:#1a7a4a;--orange:#e08020;
-  --font:'DM Sans',-apple-system,sans-serif;--mono:'DM Mono',ui-monospace,monospace;
+  --paper:#faf8f4; --paper2:#f3f0ea; --paper3:#e8e3d8;
+  --ink:#1c1a16;   --ink2:#4a4640;   --ink3:#8a8580;
+  --rule:#d4cfc5;
+  --teal:#1d6a72;  --teal-bg:#e8f4f5;
+  --rust:#b84a2a;  --rust-bg:#fdf0ec;
+  --gold:#c08030;  --gold-bg:#fdf5e8;
+  --sage:#3a6a48;  --sage-bg:#eaf2ec;
+  --violet:#6a4a90;--violet-bg:#f2eef8;
+  --blue:#2a5a8a;  --blue-bg:#e8f0f8;
+  --font:'DM Sans',sans-serif;
+  --serif:'Lora',Georgia,serif;
+  --mono:'DM Mono',ui-monospace,monospace;
+  --shadow:0 2px 12px rgba(28,26,22,.08);
 }
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}
-.page{max-width:880px;margin:0 auto;padding:28px 20px}
-.lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
-.title{font-size:22px;font-weight:700;margin-bottom:5px}
-.subtitle{font-size:14px;color:var(--text2);margin-bottom:22px;max-width:560px;line-height:1.5}
-.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:22px;margin-bottom:16px}
-.tabs{display:flex;gap:4px;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:4px;margin-bottom:18px}
-.tab{flex:1;padding:8px 0;text-align:center;font-size:13px;font-weight:500;color:var(--text2);border-radius:7px;cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .12s}
-.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08);border:1.5px solid var(--border)}
-.sl-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.sl-row label{font-size:13px;font-weight:500;color:var(--text2);min-width:140px}
-.sl-row input[type=range]{flex:1;height:5px;cursor:pointer}
-.sl-val{font-family:var(--mono);font-size:15px;font-weight:700;min-width:52px;text-align:right}
-.layout{display:grid;grid-template-columns:1fr 260px;gap:16px;align-items:start}
-@media(max-width:580px){.layout{grid-template-columns:1fr}}
-canvas{display:block;width:100%;border-radius:10px;border:1.5px solid var(--border);background:#fafaf8}
-.info-panel{display:flex;flex-direction:column;gap:10px}
-.info-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;padding:12px 14px}
-.ic-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:7px}
-.ic-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid var(--border);font-size:13px}
+body{font-family:var(--font);background:var(--paper);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;padding:28px 20px 60px;line-height:1.6;background-image:radial-gradient(circle at 20% 30%,rgba(192,128,48,.04) 0,transparent 50%),radial-gradient(circle at 80% 70%,rgba(29,106,114,.04) 0,transparent 50%)}
+.app{max-width:880px;margin:0 auto}
+
+.header{margin-bottom:24px;padding-bottom:18px;border-bottom:1.5px solid var(--rule)}
+.chapter-badge{display:inline-flex;align-items:center;gap:8px;background:var(--paper2);border:1.5px solid var(--rule);border-radius:20px;padding:4px 14px 4px 10px;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
+.badge-num{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px;font-weight:700;font-family:var(--mono);display:flex;align-items:center;justify-content:center}
+h1{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-.3px;line-height:1.2;margin-bottom:5px}
+.header-sub{font-size:14px;color:var(--ink2);max-width:560px;line-height:1.55}
+
+.card{background:var(--paper);border:1.5px solid var(--rule);border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.concept{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 16px;margin-bottom:20px;font-family:var(--serif);font-style:italic;font-size:14px;color:#4a3010;line-height:1.65}
+.concept strong{font-style:normal;font-weight:700;color:#3a2008}
+
+/* Tabs */
+.tabs{display:flex;gap:3px;background:var(--paper2);border:1.5px solid var(--rule);border-radius:12px;padding:4px;margin-bottom:22px}
+.tab{flex:1;padding:10px;border:none;background:transparent;border-radius:9px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s;text-align:center}
+.tab:hover{color:var(--ink2)}
+.tab.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(28,26,22,.10);border:1.5px solid var(--rule)}
+.view{display:none}.view.active{display:block}
+
+/* Slider rows */
+.sliders{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.sl-row{display:flex;align-items:center;gap:10px}
+.sl-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);min-width:150px;white-space:nowrap}
+.sl-row input[type=range]{flex:1;height:5px;cursor:pointer;border-radius:3px}
+.sl-val{font-family:var(--mono);font-size:14px;font-weight:800;min-width:48px;text-align:right}
+
+/* Checkbox row */
+.cb-row{display:flex;align-items:center;gap:10px;padding:6px 0}
+.cb-row input[type=checkbox]{width:17px;height:17px;cursor:pointer;flex-shrink:0}
+.cb-row label{font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer}
+
+/* Layout */
+.main-layout{display:grid;grid-template-columns:1fr 230px;gap:16px;align-items:start}
+@media(max-width:580px){.main-layout{grid-template-columns:1fr}}
+
+/* Canvas */
+.canvas-wrap{background:var(--paper2);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
+canvas{display:block;width:100%}
+
+/* Info panel */
+.info-panel{display:flex;flex-direction:column;gap:8px}
+.info-card{background:#fff;border:1.5px solid var(--rule);border-radius:9px;padding:11px 13px}
+.ic-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:7px}
+.ic-row{display:flex;align-items:baseline;justify-content:space-between;gap:6px;padding:4px 0;border-bottom:1px solid var(--rule);font-size:12.5px}
 .ic-row:last-child{border-bottom:none;padding-bottom:0}
-.ic-row-label{color:var(--text2);font-weight:500;font-size:12.5px}
-.ic-row-val{font-family:var(--mono);font-weight:700;font-size:13.5px;color:var(--text);text-align:right}
-.insight{background:#fff8f0;border:1.5px solid #f0d8c0;border-radius:10px;padding:13px 18px;font-size:13.5px;color:#6b4400;line-height:1.65;margin-top:14px}
-.insight strong{color:#a05000}
-.insight .eq{font-family:var(--mono);font-size:13px;display:block;margin:2px 0}
+.ic-key{color:var(--ink2);font-weight:600;font-family:var(--mono);font-size:12px}
+.ic-val{font-family:var(--mono);font-weight:800;font-size:13px;color:var(--ink)}
+
+/* Insight */
+.insight{background:var(--gold-bg);border:1px solid #e0c080;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 15px;font-size:13px;color:#6b4400;line-height:1.65;margin-top:16px}
+.insight strong{color:#4a2e00}
+.insight code{font-family:var(--mono);font-weight:700;background:rgba(192,128,48,.15);padding:1px 5px;border-radius:4px;font-size:12px}
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="lbl">Chapter 4 · Quadrilaterals</div>
-  <div class="title">Rhombus, Kite and Trapezium</div>
-  <div class="subtitle">Explore the three remaining quadrilateral types. Drag the sliders and watch how the diagonals, angles, and parallel sides all respond to the rules of each shape.</div>
+<div class="app">
+  <div class="header">
+    <div class="chapter-badge"><div class="badge-num">4</div>Chapter 4 · Quadrilaterals</div>
+    <h1>Rhombus, Kite & Trapezium</h1>
+    <p class="header-sub">Adjust the sliders and watch the diagonals, angles, and parallel sides respond to each shape's rules. The constraints are built in — you can't break them.</p>
+  </div>
 
   <div class="card">
     <div class="tabs">
-      <button class="tab active" id="t0" onclick="switchTab(0)">Rhombus</button>
-      <button class="tab" id="t1" onclick="switchTab(1)">Kite</button>
-      <button class="tab" id="t2" onclick="switchTab(2)">Trapezium</button>
+      <button class="tab active" onclick="switchTab(0)">Rhombus</button>
+      <button class="tab" onclick="switchTab(1)">Kite</button>
+      <button class="tab" onclick="switchTab(2)">Trapezium</button>
     </div>
 
-    <div id="v0">
-      <div class="sl-row">
-        <label>Side length</label>
-        <input type="range" id="rSide" min="50" max="140" value="100" style="accent-color:var(--red)" oninput="renderRhombus()">
-        <span class="sl-val" style="color:var(--red)" id="rSideV">100</span>
+    <!-- ══ RHOMBUS ══ -->
+    <div class="view active" id="v0">
+      <div class="concept"><strong>Rhombus:</strong> all four sides equal. The diagonals bisect each other at exactly 90° and each bisects its vertex angles. It is a parallelogram — so opposite angles are equal and adjacent angles sum to 180°.</div>
+      <div class="sliders">
+        <div class="sl-row">
+          <span class="sl-label">Side length</span>
+          <input type="range" id="rSide" min="50" max="140" value="100" style="accent-color:var(--rust)" oninput="renderRhombus()">
+          <span class="sl-val" style="color:var(--rust)" id="rSideV">100</span>
+        </div>
+        <div class="sl-row">
+          <span class="sl-label">Angle ∠A</span>
+          <input type="range" id="rAng" min="20" max="160" value="60" style="accent-color:var(--gold)" oninput="renderRhombus()">
+          <span class="sl-val" style="color:var(--gold)" id="rAngV">60°</span>
+        </div>
       </div>
-      <div class="sl-row">
-        <label>Angle A (°)</label>
-        <input type="range" id="rAng" min="20" max="160" value="60" style="accent-color:var(--orange)" oninput="renderRhombus()">
-        <span class="sl-val" style="color:var(--orange)" id="rAngV">60°</span>
-      </div>
-      <div class="layout">
-        <canvas id="rCvs" height="300"></canvas>
+      <div class="main-layout">
+        <div class="canvas-wrap"><canvas id="rCvs" height="300"></canvas></div>
         <div class="info-panel" id="rInfo"></div>
       </div>
-      <div class="insight">
-        <strong>Rhombus:</strong> All four sides equal. The diagonals bisect each other at 90°, and each diagonal bisects its two vertex angles.
-        <span class="eq">∠A = ∠C, ∠B = ∠D, ∠A + ∠B = 180°</span>
-        A rhombus is a parallelogram — so it inherits all parallelogram properties too.
-      </div>
+      <div class="insight">All four sides = <strong>one slider</strong>. Angle ∠A sets everything: ∠C = ∠A, ∠B = ∠D = 180° − ∠A. The diagonals always cross at <strong>90°</strong> — try making ∠A = 90° and the rhombus becomes a square.</div>
     </div>
 
-    <div id="v1" style="display:none">
-      <div class="sl-row">
-        <label>AB length (top)</label>
-        <input type="range" id="kAB" min="40" max="130" value="80" style="accent-color:var(--purple,#6d28d9)" oninput="renderKite()">
-        <span class="sl-val" style="color:#6d28d9" id="kABv">80</span>
+    <!-- ══ KITE ══ -->
+    <div class="view" id="v1">
+      <div class="concept"><strong>Kite:</strong> two pairs of adjacent sides equal (AB = AD, CB = CD). The main diagonal AC is a line of symmetry — it bisects BD at 90° and bisects the angles at A and C. One pair of opposite angles (∠B = ∠D) are equal.</div>
+      <div class="sliders">
+        <div class="sl-row">
+          <span class="sl-label">AB = AD (top)</span>
+          <input type="range" id="kTop" min="40" max="130" value="80" style="accent-color:var(--violet)" oninput="renderKite()">
+          <span class="sl-val" style="color:var(--violet)" id="kTopV">80</span>
+        </div>
+        <div class="sl-row">
+          <span class="sl-label">CB = CD (bottom)</span>
+          <input type="range" id="kBot" min="50" max="160" value="120" style="accent-color:var(--violet)" oninput="renderKite()">
+          <span class="sl-val" style="color:var(--violet)" id="kBotV">120</span>
+        </div>
+        <div class="sl-row">
+          <span class="sl-label">Half-width at A</span>
+          <input type="range" id="kW" min="20" max="110" value="55" style="accent-color:var(--gold)" oninput="renderKite()">
+          <span class="sl-val" style="color:var(--gold)" id="kWV">55</span>
+        </div>
       </div>
-      <div class="sl-row">
-        <label>CD length (bottom)</label>
-        <input type="range" id="kCD" min="50" max="160" value="120" style="accent-color:var(--purple,#6d28d9)" oninput="renderKite()">
-        <span class="sl-val" style="color:#6d28d9" id="kCDv">120</span>
-      </div>
-      <div class="sl-row">
-        <label>Top angle ∠A</label>
-        <input type="range" id="kAng" min="20" max="140" value="70" style="accent-color:var(--orange)" oninput="renderKite()">
-        <span class="sl-val" style="color:var(--orange)" id="kAngV">70°</span>
-      </div>
-      <div class="layout">
-        <canvas id="kCvs" height="300"></canvas>
+      <div class="main-layout">
+        <div class="canvas-wrap"><canvas id="kCvs" height="300"></canvas></div>
         <div class="info-panel" id="kInfo"></div>
       </div>
-      <div class="insight">
-        <strong>Kite:</strong> Two adjacent pairs of equal sides (AB=BC, CD=DA). The "main" diagonal (from A to C) bisects the other diagonal at 90°, and bisects the angles at A and C.
-        <span class="eq">One pair of opposite angles (∠B = ∠D) are equal.</span>
-        A kite is NOT a parallelogram (opposite sides are not equal).
-      </div>
+      <div class="insight">Drag the half-width to see the kite widen and narrow. The <strong>90° crossing</strong> of the diagonals is always preserved — that's the kite's defining diagonal property. Notice ∠B always equals ∠D.</div>
     </div>
 
-    <div id="v2" style="display:none">
-      <div class="sl-row">
-        <label>Top side (parallel)</label>
-        <input type="range" id="tTop" min="40" max="160" value="100" style="accent-color:var(--blue)" oninput="renderTrap()">
-        <span class="sl-val" style="color:var(--blue)" id="tTopV">100</span>
+    <!-- ══ TRAPEZIUM ══ -->
+    <div class="view" id="v2">
+      <div class="concept"><strong>Trapezium:</strong> at least one pair of parallel sides (PQ ∥ SR). Co-interior angles on the same side always add to 180°: ∠P + ∠S = 180° and ∠Q + ∠R = 180°. In an isosceles trapezium the legs are equal and base angles are equal.</div>
+      <div class="sliders">
+        <div class="sl-row">
+          <span class="sl-label">Top PQ</span>
+          <input type="range" id="tTop" min="40" max="160" value="100" style="accent-color:var(--teal)" oninput="renderTrap()">
+          <span class="sl-val" style="color:var(--teal)" id="tTopV">100</span>
+        </div>
+        <div class="sl-row">
+          <span class="sl-label">Bottom SR</span>
+          <input type="range" id="tBot" min="80" max="220" value="180" style="accent-color:var(--teal)" oninput="renderTrap()">
+          <span class="sl-val" style="color:var(--teal)" id="tBotV">180</span>
+        </div>
+        <div class="sl-row">
+          <span class="sl-label">Base angle ∠S</span>
+          <input type="range" id="tAng" min="30" max="150" value="70" style="accent-color:var(--gold)" oninput="renderTrap()">
+          <span class="sl-val" style="color:var(--gold)" id="tAngV">70°</span>
+        </div>
+        <div class="cb-row">
+          <input type="checkbox" id="tIso" style="accent-color:var(--sage)" onchange="renderTrap()">
+          <label for="tIso">Isosceles (SP = QR, base angles equal)</label>
+        </div>
       </div>
-      <div class="sl-row">
-        <label>Bottom side (parallel)</label>
-        <input type="range" id="tBot" min="80" max="220" value="180" style="accent-color:var(--blue)" oninput="renderTrap()">
-        <span class="sl-val" style="color:var(--blue)" id="tBotV">180</span>
-      </div>
-      <div class="sl-row">
-        <label>Base angle P (°)</label>
-        <input type="range" id="tAng" min="30" max="150" value="70" style="accent-color:var(--orange)" oninput="renderTrap()">
-        <span class="sl-val" style="color:var(--orange)" id="tAngV">70°</span>
-      </div>
-      <div class="sl-row">
-        <label>Isosceles?</label>
-        <input type="checkbox" id="tIso" style="width:20px;height:20px;accent-color:var(--green)" onchange="renderTrap()">
-        <label for="tIso" style="font-size:13px;color:var(--text2)">Make left and right legs equal</label>
-      </div>
-      <div class="layout">
-        <canvas id="tCvs" height="300"></canvas>
+      <div class="main-layout">
+        <div class="canvas-wrap"><canvas id="tCvs" height="300"></canvas></div>
         <div class="info-panel" id="tInfo"></div>
       </div>
-      <div class="insight">
-        <strong>Trapezium:</strong> At least one pair of parallel sides. Co-interior angles on the same side add to 180°.
-        <span class="eq">∠P + ∠S = 180°, ∠Q + ∠R = 180°</span>
-        In an isosceles trapezium, the two non-parallel sides are equal, and the base angles are equal (∠P = ∠Q, ∠R = ∠S).
-      </div>
+      <div class="insight">Notice that ∠P + ∠S is always <strong>exactly 180°</strong> no matter how you move the sliders — that's the co-interior angle rule for parallel lines. Tick isosceles and watch both legs become equal and both pairs of base angles equalise.</div>
     </div>
   </div>
 </div>
 
 <script>
-const DEG=Math.PI/180;
+const DEG = Math.PI / 180;
+const PR  = Math.min(window.devicePixelRatio||1, 2);
 
+let activeTab = 0;
 function switchTab(i){
-  [0,1,2].forEach(j=>{
-    document.getElementById('t'+j).classList.toggle('active',j===i);
-    document.getElementById('v'+j).style.display=j===i?'block':'none';
-  });
-  if(i===0)renderRhombus();
-  if(i===1)renderKite();
-  if(i===2)renderTrap();
+  activeTab = i;
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  document.querySelectorAll('.view').forEach((v,j)=>v.classList.toggle('active',j===i));
+  if(i===0) renderRhombus();
+  if(i===1) renderKite();
+  if(i===2) renderTrap();
 }
 
-// ── RHOMBUS ────────────────────────────────────────────────────────────────
-function renderRhombus(){
-  const side=parseInt(document.getElementById('rSide').value);
-  const angA=parseInt(document.getElementById('rAng').value);
-  document.getElementById('rSideV').textContent=side;
-  document.getElementById('rAngV').textContent=angA+'°';
-  const angB=180-angA;
-  document.getElementById('rInfo').innerHTML=`
-    <div class="info-card">
-      <div class="ic-label">Angles</div>
-      <div class="ic-row"><span class="ic-row-label">∠A = ∠C</span><span class="ic-row-val">${angA}°</span></div>
-      <div class="ic-row"><span class="ic-row-label">∠B = ∠D</span><span class="ic-row-val">${angB}°</span></div>
-      <div class="ic-row"><span class="ic-row-label">∠A + ∠B</span><span class="ic-row-val">= 180° ✓</span></div>
-    </div>
-    <div class="info-card">
-      <div class="ic-label">Sides</div>
-      <div class="ic-row"><span class="ic-row-label">All four sides</span><span class="ic-row-val">${side}</span></div>
-    </div>
-    <div class="info-card">
-      <div class="ic-label">Diagonals</div>
-      <div class="ic-row"><span class="ic-row-label">Cross at</span><span class="ic-row-val">90°</span></div>
-      <div class="ic-row"><span class="ic-row-label">Bisect each other</span><span class="ic-row-val">✓</span></div>
-      <div class="ic-row"><span class="ic-row-label">Each bisects vertex ∠</span><span class="ic-row-val">${angA/2}° + ${angA/2}°</span></div>
-    </div>`;
-  drawRhombus(side,angA);
-}
-function drawRhombus(side,angA){
-  const cvs=document.getElementById('rCvs');
-  const PR=window.devicePixelRatio||1;
-  const W=cvs.parentElement.clientWidth, H=300;
-  cvs.width=W*PR; cvs.height=H*PR; cvs.style.width=W+'px'; cvs.style.height=H+'px';
-  const ctx=cvs.getContext('2d'); ctx.scale(PR,PR);
-  ctx.fillStyle='#fafaf8'; ctx.fillRect(0,0,W,H);
-  const angR=angA*DEG;
-  const cx=W/2, cy=H/2;
-  const d1=2*side*Math.cos((90-angA/2)*DEG); // horizontal diagonal
-  const d2=2*side*Math.sin((90-angA/2)*DEG); // vertical diagonal
-  const A={x:cx,y:cy-d2/2};
-  const B={x:cx+d1/2,y:cy};
-  const C={x:cx,y:cy+d2/2};
-  const D={x:cx-d1/2,y:cy};
-  // Diagonals
-  ctx.setLineDash([5,4]); ctx.strokeStyle='#c0b8a8'; ctx.lineWidth=1.5;
-  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(C.x,C.y); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(B.x,B.y); ctx.lineTo(D.x,D.y); ctx.stroke();
-  ctx.setLineDash([]);
-  // Right angle at center
-  const sq=8;
-  ctx.beginPath(); ctx.strokeStyle='#9a958e'; ctx.lineWidth=1.5;
-  ctx.moveTo(cx+sq,cy); ctx.lineTo(cx+sq,cy-sq); ctx.lineTo(cx,cy-sq); ctx.stroke();
-  // Shape
-  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.lineTo(C.x,C.y); ctx.lineTo(D.x,D.y); ctx.closePath();
-  ctx.fillStyle='rgba(192,57,43,.08)'; ctx.fill();
-  ctx.strokeStyle='#c0392b'; ctx.lineWidth=2.5; ctx.stroke();
-  // Labels
-  [{p:A,l:'A',dx:0,dy:-14},{p:B,l:'B',dx:14,dy:4},{p:C,l:'C',dx:0,dy:16},{p:D,l:'D',dx:-16,dy:4}].forEach(v=>{
-    ctx.font='bold 13px DM Sans'; ctx.fillStyle='#1a1814'; ctx.textAlign='center';
-    ctx.fillText(v.l, v.p.x+v.dx, v.p.y+v.dy);
-    // Angle arcs
-  });
-  // Angle labels
-  const angB=180-angA;
-  const angLabels=[{p:A,a:angA,ang:270},{p:B,a:angB,ang:0},{p:C,a:angA,ang:90},{p:D,a:angB,ang:180}];
-  angLabels.forEach(v=>{
-    const ar=v.ang*DEG;
-    ctx.font='bold 11px DM Mono'; ctx.fillStyle='#e08020'; ctx.textAlign='center';
-    ctx.fillText(v.a+'°', v.p.x+42*Math.cos(ar), v.p.y+42*Math.sin(ar));
-    ctx.beginPath(); ctx.strokeStyle='#e08020'; ctx.lineWidth=1.5;
-    ctx.arc(v.p.x,v.p.y, 22, ar-35*DEG, ar+35*DEG); ctx.stroke();
-  });
+// ── Shared canvas setup ──────────────────────────────
+function setupCanvas(id, H){
+  const cvs = document.getElementById(id);
+  const W   = cvs.parentElement.clientWidth;
+  cvs.width  = W * PR; cvs.height = H * PR;
+  cvs.style.width  = W + 'px';
+  cvs.style.height = H + 'px';
+  const ctx = cvs.getContext('2d');
+  ctx.resetTransform(); ctx.scale(PR, PR);
+  // Warm cream + dot grid
+  ctx.fillStyle = '#f3f0ea'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = 'rgba(180,170,158,.2)';
+  for(let gx=20;gx<W;gx+=20)
+    for(let gy=20;gy<H;gy+=20){
+      ctx.beginPath();ctx.arc(gx,gy,1,0,Math.PI*2);ctx.fill();
+    }
+  return {ctx, W, H};
 }
 
-// ── KITE ────────────────────────────────────────────────────────────────────
-function renderKite(){
-  const ab=parseInt(document.getElementById('kAB').value);
-  const cd=parseInt(document.getElementById('kCD').value);
-  const angTop=parseInt(document.getElementById('kAng').value);
-  document.getElementById('kABv').textContent=ab;
-  document.getElementById('kCDv').textContent=cd;
-  document.getElementById('kAngV').textContent=angTop+'°';
-  // Compute angles at B and D using the kite geometry
-  const halfTop=angTop/2*DEG;
-  const h1=ab*Math.sin(halfTop), h2=cd*Math.sin(halfTop);
-  const angB=Math.round(180-2*Math.atan2(h1,ab*Math.cos(halfTop))/DEG);
-  const angC=360-angTop-2*angB; // rough
-  document.getElementById('kInfo').innerHTML=`
-    <div class="info-card">
-      <div class="ic-label">Sides</div>
-      <div class="ic-row"><span class="ic-row-label">AB = BC</span><span class="ic-row-val">${ab}</span></div>
-      <div class="ic-row"><span class="ic-row-label">CD = DA</span><span class="ic-row-val">${cd}</span></div>
-    </div>
-    <div class="info-card">
-      <div class="ic-label">Angles</div>
-      <div class="ic-row"><span class="ic-row-label">∠A (top vertex)</span><span class="ic-row-val">${angTop}°</span></div>
-      <div class="ic-row"><span class="ic-row-label">∠B = ∠D</span><span class="ic-row-val">opposite pair</span></div>
-      <div class="ic-row"><span class="ic-row-label">∠C (bottom vertex)</span><span class="ic-row-val">= 360−∠A−2∠B</span></div>
-    </div>
-    <div class="info-card">
-      <div class="ic-label">Diagonals</div>
-      <div class="ic-row"><span class="ic-row-label">AC bisects BD</span><span class="ic-row-val">at 90°</span></div>
-      <div class="ic-row"><span class="ic-row-label">AC bisects ∠A and ∠C</span><span class="ic-row-val">✓</span></div>
-    </div>`;
-  drawKite(ab,cd,angTop);
-}
-function drawKite(ab,cd,angTop){
-  const cvs=document.getElementById('kCvs');
-  const PR=window.devicePixelRatio||1;
-  const W=cvs.parentElement.clientWidth, H=300;
-  cvs.width=W*PR; cvs.height=H*PR; cvs.style.width=W+'px'; cvs.style.height=H+'px';
-  const ctx=cvs.getContext('2d'); ctx.scale(PR,PR);
-  ctx.fillStyle='#fafaf8'; ctx.fillRect(0,0,W,H);
-  const halfAng=angTop/2*DEG;
-  const cx=W/2, cy=40;
-  const A={x:cx, y:cy};
-  const B={x:cx+ab*Math.sin(halfAng), y:cy+ab*Math.cos(halfAng)};
-  const D={x:cx-ab*Math.sin(halfAng), y:cy+ab*Math.cos(halfAng)};
-  const midBD={x:cx, y:cy+ab*Math.cos(halfAng)};
-  // C is below midBD by cd*cos(halfAng)
-  const halfAngC=Math.asin(B.x-cx)/cd; // not quite right but close enough
-  const Cy=midBD.y+Math.sqrt(cd*cd-(B.x-cx)*(B.x-cx));
-  const C={x:cx, y:Math.min(Cy, H-20)};
-  // Diagonals
-  ctx.setLineDash([5,4]); ctx.strokeStyle='#c0b8a8'; ctx.lineWidth=1.5;
-  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(C.x,C.y); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(B.x,B.y); ctx.lineTo(D.x,D.y); ctx.stroke();
-  ctx.setLineDash([]);
-  // Right angle at midBD
-  const sq=7;
-  ctx.beginPath(); ctx.strokeStyle='#9a958e'; ctx.lineWidth=1.5;
-  ctx.moveTo(cx+sq,midBD.y); ctx.lineTo(cx+sq,midBD.y-sq); ctx.lineTo(cx,midBD.y-sq); ctx.stroke();
-  // Shape
-  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.lineTo(C.x,C.y); ctx.lineTo(D.x,D.y); ctx.closePath();
-  ctx.fillStyle='rgba(109,40,217,.08)'; ctx.fill();
-  ctx.strokeStyle='#6d28d9'; ctx.lineWidth=2.5; ctx.stroke();
-  // Tick marks
-  drawT(ctx,A,B,'#6d28d9',1); drawT(ctx,B,C,'#6d28d9',1);
-  drawT(ctx,C,D,'#6d28d9',2); drawT(ctx,D,A,'#6d28d9',2);
-  // Labels
-  [{p:A,l:'A',dx:0,dy:-14},{p:B,l:'B',dx:14,dy:4},{p:C,l:'C',dx:0,dy:16},{p:D,l:'D',dx:-16,dy:4}].forEach(v=>{
-    ctx.font='bold 13px DM Sans'; ctx.fillStyle='#1a1814'; ctx.textAlign='center';
-    ctx.fillText(v.l, v.p.x+v.dx, v.p.y+v.dy);
-    ctx.beginPath(); ctx.fillStyle='#6d28d9'; ctx.arc(v.p.x,v.p.y,5,0,Math.PI*2); ctx.fill();
-  });
-  // Angle A
-  ctx.font='bold 11px DM Mono'; ctx.fillStyle='#e08020'; ctx.textAlign='center';
-  ctx.fillText(angTop+'°', cx, cy+50);
-}
-function drawT(ctx,p1,p2,color,n){
-  const mx=(p1.x+p2.x)/2,my=(p1.y+p2.y)/2;
-  const dx=p2.x-p1.x,dy=p2.y-p1.y,l=Math.sqrt(dx*dx+dy*dy);
-  const nx=-dy/l*6,ny=dx/l*6;
-  const ux=dx/l,uy=dy/l;
-  for(let k=0;k<n;k++){const o=(k-(n-1)/2)*5;ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.moveTo(mx+ux*o-nx,my+uy*o-ny);ctx.lineTo(mx+ux*o+nx,my+uy*o+ny);ctx.stroke();}
+function vertex(ctx, x, y, col, label, dx, dy){
+  ctx.beginPath(); ctx.arc(x,y,7,0,Math.PI*2);
+  ctx.fillStyle=col; ctx.fill();
+  ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
+  ctx.fillStyle='#fff'; ctx.fill();
+  ctx.font='bold 13px DM Sans,sans-serif';
+  ctx.fillStyle=col; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(label, x+dx, y+dy);
 }
 
-// ── TRAPEZIUM ───────────────────────────────────────────────────────────────
-function renderTrap(){
-  const top=parseInt(document.getElementById('tTop').value);
-  const bot=parseInt(document.getElementById('tBot').value);
-  const angP=parseInt(document.getElementById('tAng').value);
-  const iso=document.getElementById('tIso').checked;
-  document.getElementById('tTopV').textContent=top;
-  document.getElementById('tBotV').textContent=bot;
-  document.getElementById('tAngV').textContent=angP+'°';
-  const angQ=iso?angP:180-angP; // if iso, ∠Q = ∠P; else arbitrary
-  const angS=180-angP, angR=180-angQ;
-  document.getElementById('tInfo').innerHTML=`
-    <div class="info-card">
-      <div class="ic-label">Parallel sides</div>
-      <div class="ic-row"><span class="ic-row-label">PQ (top)</span><span class="ic-row-val">${top}</span></div>
-      <div class="ic-row"><span class="ic-row-label">SR (bottom)</span><span class="ic-row-val">${bot}</span></div>
-    </div>
-    <div class="info-card">
-      <div class="ic-label">Angles</div>
-      <div class="ic-row"><span class="ic-row-label">∠P</span><span class="ic-row-val">${angP}°</span></div>
-      <div class="ic-row"><span class="ic-row-label">∠Q</span><span class="ic-row-val">${iso?angQ+'° (= ∠P)':angQ+'°'}</span></div>
-      <div class="ic-row"><span class="ic-row-label">∠R</span><span class="ic-row-val">${angR}°</span></div>
-      <div class="ic-row"><span class="ic-row-label">∠S</span><span class="ic-row-val">${angS}°</span></div>
-    </div>
-    <div class="info-card">
-      <div class="ic-label">Co-interior sums</div>
-      <div class="ic-row"><span class="ic-row-label">∠S + ∠P</span><span class="ic-row-val">${angS+angP}° ✓</span></div>
-      <div class="ic-row"><span class="ic-row-label">∠R + ∠Q</span><span class="ic-row-val">${angR+angQ}° ✓</span></div>
-    </div>
-    ${iso?`<div class="info-card">
-      <div class="ic-label">Isosceles</div>
-      <div class="ic-row"><span class="ic-row-label">Legs</span><span class="ic-row-val">SP = QR</span></div>
-      <div class="ic-row"><span class="ic-row-label">Base angles</span><span class="ic-row-val">∠P = ∠Q, ∠R = ∠S</span></div>
-    </div>`:''}`;
-  drawTrap(top,bot,angP,iso,angQ);
+function angleArc(ctx, vx, vy, ang, label, col){
+  ctx.beginPath(); ctx.strokeStyle=col; ctx.lineWidth=1.5;
+  ctx.arc(vx,vy,22, ang-30*DEG, ang+30*DEG); ctx.stroke();
+  ctx.font='bold 10px DM Mono,monospace';
+  ctx.fillStyle=col; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(label, vx+38*Math.cos(ang), vy+38*Math.sin(ang));
 }
-function drawTrap(top,bot,angP,iso,angQ){
-  const cvs=document.getElementById('tCvs');
-  const PR=window.devicePixelRatio||1;
-  const W=cvs.parentElement.clientWidth, H=300;
-  cvs.width=W*PR; cvs.height=H*PR; cvs.style.width=W+'px'; cvs.style.height=H+'px';
-  const ctx=cvs.getContext('2d'); ctx.scale(PR,PR);
-  ctx.fillStyle='#fafaf8'; ctx.fillRect(0,0,W,H);
-  const bx=(W-bot)/2, by=240;
-  const h=80;
-  const tx=bx+h/Math.tan(angP*DEG);
-  const txr=iso? bx+bot-(tx-bx) : tx+top;
-  const S={x:bx,y:by}, R={x:bx+bot,y:by};
-  const P={x:tx,y:by-h}, Q={x:txr,y:by-h};
-  // Parallel mark arrows on top and bottom
-  ctx.beginPath(); ctx.moveTo(S.x,S.y); ctx.lineTo(P.x,P.y); ctx.lineTo(Q.x,Q.y); ctx.lineTo(R.x,R.y); ctx.closePath();
-  ctx.fillStyle='rgba(8,145,178,.08)'; ctx.fill();
-  ctx.strokeStyle='#0891b2'; ctx.lineWidth=2.5; ctx.stroke();
-  // Tick marks for parallel sides
-  const midTop={x:(P.x+Q.x)/2,y:(P.y+Q.y)/2}, midBot={x:(S.x+R.x)/2,y:(S.y+R.y)/2};
-  ctx.strokeStyle='#0891b2'; ctx.lineWidth=2;
-  [midTop,midBot].forEach(m=>{
-    ctx.beginPath(); ctx.moveTo(m.x-8,m.y-4); ctx.lineTo(m.x,m.y+6); ctx.lineTo(m.x+8,m.y-4); ctx.stroke();
-  });
-  if(iso){
-    drawT(ctx,S,P,'#1a7a4a',1); drawT(ctx,R,Q,'#1a7a4a',1);
+
+function rightAngleBox(ctx, ox, oy, dir, col){
+  const s=8;
+  const dx = dir==='r'?s:dir==='l'?-s:0;
+  const dy = dir==='u'?-s:dir==='d'?s:0;
+  ctx.strokeStyle=col||'rgba(100,90,80,.6)'; ctx.lineWidth=1.5;
+  ctx.beginPath();
+  ctx.moveTo(ox+dx, oy); ctx.lineTo(ox+dx, oy+dy); ctx.lineTo(ox, oy+dy);
+  ctx.stroke();
+}
+
+function tickMark(ctx, p1, p2, col, n){
+  const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+  const dx=p2.x-p1.x, dy=p2.y-p1.y, l=Math.sqrt(dx*dx+dy*dy);
+  const nx=-dy/l*6, ny=dx/l*6, ux=dx/l, uy=dy/l;
+  ctx.strokeStyle=col; ctx.lineWidth=2;
+  for(let k=0;k<n;k++){
+    const o=(k-(n-1)/2)*5;
+    ctx.beginPath();
+    ctx.moveTo(mx+ux*o-nx, my+uy*o-ny);
+    ctx.lineTo(mx+ux*o+nx, my+uy*o+ny);
+    ctx.stroke();
   }
-  // Angles
-  const angLabels=[{p:P,a:angP,dx:14,dy:6},{p:Q,a:iso?angQ:180-angP,dx:-14,dy:6},{p:R,a:180-(iso?angQ:180-angP),dx:-14,dy:-10},{p:S,a:180-angP,dx:14,dy:-10}];
-  angLabels.forEach((v,i)=>{
-    ctx.font='bold 11px DM Mono'; ctx.fillStyle='#e08020'; ctx.textAlign='center';
-    ctx.fillText(v.a+'°', v.p.x+v.dx*2, v.p.y+v.dy*2);
-  });
-  [{p:P,l:'P',dx:-10,dy:-10},{p:Q,l:'Q',dx:10,dy:-10},{p:R,l:'R',dx:10,dy:14},{p:S,l:'S',dx:-10,dy:14}].forEach(v=>{
-    ctx.font='bold 13px DM Sans'; ctx.fillStyle='#1a1814'; ctx.textAlign='center';
-    ctx.fillText(v.l, v.p.x+v.dx, v.p.y+v.dy);
-    ctx.beginPath(); ctx.fillStyle='#0891b2'; ctx.arc(v.p.x,v.p.y,5,0,Math.PI*2); ctx.fill();
-  });
-  // Length labels
-  ctx.font='12px DM Mono'; ctx.fillStyle='#0891b2'; ctx.textAlign='center';
-  ctx.fillText('PQ='+top, (P.x+Q.x)/2, P.y-10);
-  ctx.fillText('SR='+bot, (S.x+R.x)/2, S.y+18);
 }
 
-window.addEventListener('resize',()=>{renderRhombus();renderKite();renderTrap();});
+function infoCard(label, rows){
+  return `<div class="info-card"><div class="ic-lbl">${label}</div>${rows.map(([k,v])=>`<div class="ic-row"><span class="ic-key">${k}</span><span class="ic-val">${v}</span></div>`).join('')}</div>`;
+}
+
+// ══ RHOMBUS ══════════════════════════════════════════
+function renderRhombus(){
+  const side = +document.getElementById('rSide').value;
+  const angA = +document.getElementById('rAng').value;
+  document.getElementById('rSideV').textContent = side;
+  document.getElementById('rAngV').textContent  = angA + '°';
+  const angB = 180 - angA;
+
+  // Diagonals: d1 = 2*side*sin(angA/2), d2 = 2*side*cos(angA/2)
+  const d1 = 2 * side * Math.sin(angA/2 * DEG);  // shorter if angA<90
+  const d2 = 2 * side * Math.cos(angA/2 * DEG);
+
+  const {ctx, W, H} = setupCanvas('rCvs', 300);
+  const cx = W/2, cy = H/2;
+  const A={x:cx,     y:cy-d2/2};
+  const B={x:cx+d1/2,y:cy};
+  const C={x:cx,     y:cy+d2/2};
+  const D={x:cx-d1/2,y:cy};
+
+  // Diagonals (dashed)
+  ctx.setLineDash([5,4]); ctx.strokeStyle='rgba(140,130,118,.5)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(C.x,C.y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(B.x,B.y); ctx.lineTo(D.x,D.y); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Right-angle box at centre
+  rightAngleBox(ctx, cx, cy, 'r', 'rgba(100,90,80,.6)');
+
+  // Shape fill + outline
+  ctx.beginPath();
+  ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.lineTo(C.x,C.y); ctx.lineTo(D.x,D.y);
+  ctx.closePath();
+  ctx.fillStyle='rgba(184,74,42,.10)'; ctx.fill();
+  ctx.strokeStyle='var(--rust,#b84a2a)'; ctx.lineWidth=2.5; ctx.stroke();
+
+  // Equal side tick marks
+  [[A,B],[B,C],[C,D],[D,A]].forEach(([p,q])=>tickMark(ctx,p,q,'#b84a2a',1));
+
+  // Angle arcs
+  angleArc(ctx, A.x, A.y, 90*DEG, angA+'°', '#c08030');
+  angleArc(ctx, B.x, B.y, 180*DEG, angB+'°', '#c08030');
+  angleArc(ctx, C.x, C.y, 270*DEG, angA+'°', '#c08030');
+  angleArc(ctx, D.x, D.y, 0, angB+'°', '#c08030');
+
+  // Vertex labels
+  vertex(ctx, A.x, A.y, '#b84a2a', 'A', 0, -18);
+  vertex(ctx, B.x, B.y, '#b84a2a', 'B', 18, 0);
+  vertex(ctx, C.x, C.y, '#b84a2a', 'C', 0, 18);
+  vertex(ctx, D.x, D.y, '#b84a2a', 'D', -18, 0);
+
+  // Diagonal length labels
+  ctx.font='bold 10px DM Mono,monospace'; ctx.fillStyle='rgba(100,90,80,.7)';
+  ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillText('d₁=' + d1.toFixed(1), cx+8, cy-d2/4);
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  ctx.fillText('d₂=' + d2.toFixed(1), cx-d1/4-20, cy+4);
+
+  // Info panel
+  document.getElementById('rInfo').innerHTML =
+    infoCard('Angles', [
+      ['∠A = ∠C', angA+'°'],
+      ['∠B = ∠D', angB+'°'],
+      ['∠A + ∠B', '180° ✓'],
+    ]) +
+    infoCard('Sides', [
+      ['All four', side + ' u'],
+    ]) +
+    infoCard('Diagonals', [
+      ['d₁', d1.toFixed(1)+' u'],
+      ['d₂', d2.toFixed(1)+' u'],
+      ['Cross at', '90° ✓'],
+      ['Bisect each other', '✓'],
+    ]);
+}
+
+// ══ KITE ════════════════════════════════════════════
+function renderKite(){
+  const top = +document.getElementById('kTop').value;  // AB = AD
+  const bot = +document.getElementById('kBot').value;  // CB = CD
+  const hw  = +document.getElementById('kW').value;    // half-width at widest point
+  document.getElementById('kTopV').textContent = top;
+  document.getElementById('kBotV').textContent = bot;
+  document.getElementById('kWV').textContent   = hw;
+
+  // Kite geometry: A at top, C at bottom, B right, D left
+  // hw = half-width of B,D  (capped by top and bot)
+  const hwCap = Math.min(hw, top-1, bot-1);
+  const h1 = Math.sqrt(Math.max(0, top*top - hwCap*hwCap));  // dist A to BD
+  const h2 = Math.sqrt(Math.max(0, bot*bot - hwCap*hwCap));  // dist C to BD
+
+  const {ctx, W, H} = setupCanvas('kCvs', 320);
+  const cx = W/2;
+  const topPad = 24;
+  const A={x:cx,        y:topPad};
+  const B={x:cx+hwCap,  y:topPad+h1};
+  const C={x:cx,        y:topPad+h1+h2};
+  const D={x:cx-hwCap,  y:topPad+h1};
+  const midBD={x:cx, y:topPad+h1};
+
+  // Scale down if too tall
+  const totalH = topPad + h1 + h2 + 30;
+  let scale = 1;
+  if(totalH > H-10) scale = (H-10)/totalH;
+
+  function sc(p){ return {x: cx + (p.x-cx)*scale, y: topPad + (p.y-topPad)*scale}; }
+  const sA=sc(A), sB=sc(B), sC=sc(C), sD=sc(D), sMid=sc(midBD);
+
+  // Main diagonal AC (dashed)
+  ctx.setLineDash([5,4]); ctx.strokeStyle='rgba(140,130,118,.5)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(sA.x,sA.y); ctx.lineTo(sC.x,sC.y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(sB.x,sB.y); ctx.lineTo(sD.x,sD.y); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Right angle at midBD
+  rightAngleBox(ctx, sMid.x, sMid.y, 'r', 'rgba(100,90,80,.6)');
+
+  // Shape
+  ctx.beginPath();
+  ctx.moveTo(sA.x,sA.y); ctx.lineTo(sB.x,sB.y); ctx.lineTo(sC.x,sC.y); ctx.lineTo(sD.x,sD.y);
+  ctx.closePath();
+  ctx.fillStyle='rgba(106,74,144,.10)'; ctx.fill();
+  ctx.strokeStyle='#6a4a90'; ctx.lineWidth=2.5; ctx.stroke();
+
+  // Tick marks (AB=AD, CB=CD)
+  tickMark(ctx,sA,sB,'#6a4a90',1); tickMark(ctx,sA,sD,'#6a4a90',1);
+  tickMark(ctx,sC,sB,'#6a4a90',2); tickMark(ctx,sC,sD,'#6a4a90',2);
+
+  // Angles
+  const angA = Math.round(2 * Math.atan2(hwCap, h1) / DEG);
+  const angC = Math.round(2 * Math.atan2(hwCap, h2) / DEG);
+  const angB = Math.round((360 - angA - angC) / 2);
+
+  angleArc(ctx, sA.x, sA.y, 90*DEG, angA+'°', '#c08030');
+  angleArc(ctx, sC.x, sC.y, 270*DEG, angC+'°', '#c08030');
+  angleArc(ctx, sB.x, sB.y, 180*DEG, angB+'°', '#3a6a48');
+  angleArc(ctx, sD.x, sD.y, 0, angB+'°', '#3a6a48');
+
+  // Vertices
+  vertex(ctx, sA.x, sA.y, '#6a4a90', 'A', 0, -18);
+  vertex(ctx, sB.x, sB.y, '#6a4a90', 'B', 18, 0);
+  vertex(ctx, sC.x, sC.y, '#6a4a90', 'C', 0, 18);
+  vertex(ctx, sD.x, sD.y, '#6a4a90', 'D', -18, 0);
+
+  document.getElementById('kInfo').innerHTML =
+    infoCard('Sides', [
+      ['AB = AD', top+' u'],
+      ['CB = CD', bot+' u'],
+    ]) +
+    infoCard('Angles', [
+      ['∠A', angA+'°'],
+      ['∠B = ∠D', angB+'°'],
+      ['∠C', angC+'°'],
+      ['Sum', (angA+angC+angB*2)+'° ✓'],
+    ]) +
+    infoCard('Diagonals', [
+      ['AC bisects BD', '✓'],
+      ['Cross at', '90° ✓'],
+    ]);
+}
+
+// ══ TRAPEZIUM ═══════════════════════════════════════
+function renderTrap(){
+  const top  = +document.getElementById('tTop').value;
+  const bot  = +document.getElementById('tBot').value;
+  const angS = +document.getElementById('tAng').value;  // base angle at S
+  const iso  = document.getElementById('tIso').checked;
+  const angP = iso ? angS : angS;  // same if iso, else P = S for simplicity
+  const angR = 180 - (iso ? angS : 180 - angS);
+  const angQ = 180 - angS;
+  document.getElementById('tTopV').textContent = top;
+  document.getElementById('tBotV').textContent = bot;
+  document.getElementById('tAngV').textContent = angS+'°';
+
+  const {ctx, W, H} = setupCanvas('tCvs', 300);
+  const h    = 110;
+  const bx   = (W - bot) / 2;
+  const by   = H - 50;
+  const offL = h / Math.tan(angS * DEG);
+  const offR = iso ? offL : h / Math.tan((180-angS) * DEG);
+
+  const S={x:bx,         y:by};
+  const R={x:bx+bot,      y:by};
+  const P={x:bx+offL,     y:by-h};
+  const Q={x:iso ? bx+bot-offL : bx+offL+top, y:by-h};
+
+  // Parallel marks (chevrons on PQ and SR)
+  function parallelMark(p1,p2,col){
+    const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+    const dx=p2.x-p1.x,dy=p2.y-p1.y,l=Math.sqrt(dx*dx+dy*dy);
+    const ux=dx/l,uy=dy/l;
+    [[-5,0],[0,5],[5,10]].forEach(([a])=>{
+      ctx.beginPath(); ctx.strokeStyle=col; ctx.lineWidth=2;
+      ctx.moveTo(mx+ux*(a-4)-uy*5, my+uy*(a-4)+ux*5);
+      ctx.lineTo(mx+ux*(a+4)-uy*5, my+uy*(a+4)+ux*5);
+      ctx.stroke();
+    });
+  }
+
+  // Shape
+  ctx.beginPath();
+  ctx.moveTo(S.x,S.y); ctx.lineTo(R.x,R.y); ctx.lineTo(Q.x,Q.y); ctx.lineTo(P.x,P.y);
+  ctx.closePath();
+  ctx.fillStyle='rgba(29,106,114,.10)'; ctx.fill();
+  ctx.strokeStyle='#1d6a72'; ctx.lineWidth=2.5; ctx.stroke();
+
+  // Parallel marks on both parallel sides
+  const tickCol='#1d6a72';
+  tickMark(ctx,{x:(P.x+Q.x)/2-8,y:(P.y+Q.y)/2},{x:(P.x+Q.x)/2+8,y:(P.y+Q.y)/2},tickCol,2);
+  tickMark(ctx,{x:(S.x+R.x)/2-8,y:(S.y+R.y)/2},{x:(S.x+R.x)/2+8,y:(S.y+R.y)/2},tickCol,2);
+
+  // Isosceles leg marks
+  if(iso){
+    tickMark(ctx,S,P,'#3a6a48',1);
+    tickMark(ctx,R,Q,'#3a6a48',1);
+  }
+
+  // Height line
+  ctx.setLineDash([4,3]); ctx.strokeStyle='rgba(140,130,118,.5)'; ctx.lineWidth=1.2;
+  ctx.beginPath(); ctx.moveTo(P.x,P.y); ctx.lineTo(P.x,S.y); ctx.stroke();
+  ctx.setLineDash([]);
+  rightAngleBox(ctx, P.x, S.y, 'r', 'rgba(100,90,80,.5)');
+
+  // Angles
+  angleArc(ctx, S.x, S.y, -80*DEG, angS+'°', '#c08030');
+  angleArc(ctx, R.x, R.y, 260*DEG, angQ+'°', '#c08030');
+  angleArc(ctx, P.x, P.y, 100*DEG, (180-angS)+'°', '#c08030');
+  angleArc(ctx, Q.x, Q.y, 80*DEG, angS+'°', '#c08030');
+
+  // Labels — PQ on top, SR on bottom
+  ctx.font='bold 10px DM Mono,monospace';
+  ctx.fillStyle='#1d6a72'; ctx.textAlign='center'; ctx.textBaseline='bottom';
+  ctx.fillText('PQ = '+top, (P.x+Q.x)/2, P.y-6);
+  ctx.textBaseline='top';
+  ctx.fillText('SR = '+bot, (S.x+R.x)/2, S.y+6);
+
+  vertex(ctx, P.x,P.y,'#1d6a72','P',-16,0);
+  vertex(ctx, Q.x,Q.y,'#1d6a72','Q', 16,0);
+  vertex(ctx, R.x,R.y,'#1d6a72','R', 14,0);
+  vertex(ctx, S.x,S.y,'#1d6a72','S',-16,0);
+
+  const realAngQ = iso ? angS : 180-angS;
+  document.getElementById('tInfo').innerHTML =
+    infoCard('Parallel sides', [
+      ['PQ (top)',  top+' u'],
+      ['SR (bottom)', bot+' u'],
+    ]) +
+    infoCard('Angles', [
+      ['∠S', angS+'°'],
+      ['∠P', (180-angS)+'°'],
+      ['∠R', realAngQ+'°'],
+      ['∠Q', (180-realAngQ)+'°'],
+    ]) +
+    infoCard('Co-interior', [
+      ['∠S + ∠P', (angS+180-angS)+'° ✓'],
+      ['∠R + ∠Q', (realAngQ+180-realAngQ)+'° ✓'],
+    ]) +
+    (iso ? infoCard('Isosceles', [
+      ['SP = QR','✓'],
+      ['∠S = ∠R', angS+'°'],
+      ['∠P = ∠Q', (180-angS)+'°'],
+    ]) : '');
+}
+
+new ResizeObserver(()=>{
+  if(activeTab===0) renderRhombus();
+  if(activeTab===1) renderKite();
+  if(activeTab===2) renderTrap();
+}).observe(document.querySelector('.card'));
+
 renderRhombus();
 </script>
 </body>
