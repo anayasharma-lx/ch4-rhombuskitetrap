@@ -5,523 +5,519 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Rhombus, Kite & Trapezium — Ganita Prakash Grade 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --paper:#faf8f4; --paper2:#f3f0ea; --paper3:#e8e3d8;
-  --ink:#1c1a16;   --ink2:#4a4640;   --ink3:#8a8580;
-  --rule:#d4cfc5;
-  --teal:#1d6a72;  --teal-bg:#e8f4f5;
-  --rust:#b84a2a;  --rust-bg:#fdf0ec;
-  --gold:#c08030;  --gold-bg:#fdf5e8;
-  --sage:#3a6a48;  --sage-bg:#eaf2ec;
-  --violet:#6a4a90;--violet-bg:#f2eef8;
-  --blue:#2a5a8a;  --blue-bg:#e8f0f8;
-  --font:'DM Sans',sans-serif;
-  --serif:'Lora',Georgia,serif;
-  --mono:'DM Mono',ui-monospace,monospace;
-  --shadow:0 2px 12px rgba(28,26,22,.08);
+  --parch:#f5eedc;
+  --parch2:#ede4c8;
+  --parch3:#e4d8b0;
+  --parch4:#d4c898;
+  --bark:#7a6840;
+  --bark2:#5a4820;
+  --ink:#2a1c08;
+  --ink2:#4a3820;
+  --ink3:#7a6848;
+  --rule:#c8b880;
+  --rule2:#ddd090;
+  --rust:#b84020;
+  --rust-bg:rgba(184,64,32,.08);
+  --violet:#6a3888;
+  --violet-bg:rgba(106,56,136,.08);
+  --teal:#1a6a60;
+  --teal-bg:rgba(26,106,96,.08);
+  --gold:#b87820;
+  --gold-bg:rgba(184,120,32,.1);
+  --sage:#2a6030;
+  --serif:'Instrument Serif',Georgia,serif;
+  --mono:'Space Mono',ui-monospace,monospace;
 }
-body{font-family:var(--font);background:var(--paper);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;padding:28px 20px 60px;line-height:1.6;background-image:radial-gradient(circle at 20% 30%,rgba(192,128,48,.04) 0,transparent 50%),radial-gradient(circle at 80% 70%,rgba(29,106,114,.04) 0,transparent 50%)}
-.app{max-width:880px;margin:0 auto}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  font-family:var(--mono);
+  background:var(--parch);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;
+  position:fixed;inset:0;
+}
 
-.header{margin-bottom:24px;padding-bottom:18px;border-bottom:1.5px solid var(--rule)}
-.chapter-badge{display:inline-flex;align-items:center;gap:8px;background:var(--paper2);border:1.5px solid var(--rule);border-radius:20px;padding:4px 14px 4px 10px;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
-.badge-num{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px;font-weight:700;font-family:var(--mono);display:flex;align-items:center;justify-content:center}
-h1{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-.3px;line-height:1.2;margin-bottom:5px}
-.header-sub{font-size:14px;color:var(--ink2);max-width:560px;line-height:1.55}
+/* parchment texture */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 22px,rgba(160,130,80,.06) 22px,rgba(160,130,80,.06) 23px),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
 
-.card{background:var(--paper);border:1.5px solid var(--rule);border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
-.concept{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 16px;margin-bottom:20px;font-family:var(--serif);font-style:italic;font-size:14px;color:#4a3010;line-height:1.65}
-.concept strong{font-style:normal;font-weight:700;color:#3a2008}
+/* ── HEADER ── */
+.top{
+  position:relative;z-index:10;
+  border-bottom:2px solid var(--ink);
+  background:var(--parch2);
+  display:flex;align-items:stretch;
+  flex-shrink:0;
+}
+.top-left{
+  padding:8px 16px;border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;justify-content:center;min-width:160px;
+}
+.top-ch{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-bottom:1px}
+.top-title{font-size:17px;font-weight:400;color:var(--ink);font-family:var(--serif)}
+.top-tabs{display:flex;align-items:stretch;flex:1}
+.ttab{
+  flex:1;padding:0 14px;
+  border:none;background:transparent;
+  border-right:1px solid var(--rule);
+  font-family:var(--serif);font-size:14px;color:var(--ink3);
+  cursor:pointer;transition:all .15s;
+  border-bottom:2px solid transparent;
+  position:relative;top:0;
+}
+.ttab:hover{color:var(--ink2);background:rgba(0,0,0,.03)}
+.ttab.active{color:var(--ink);background:var(--parch);border-bottom-color:var(--ink)}
+.top-right{
+  border-left:1px solid var(--rule);padding:8px 14px;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:2px;min-width:130px;font-size:10px;
+}
+.tr-lbl{color:var(--ink3);letter-spacing:.08em}
+.tr-val{font-size:13px;font-weight:700;color:var(--ink);font-family:var(--mono)}
 
-/* Tabs */
-.tabs{display:flex;gap:3px;background:var(--paper2);border:1.5px solid var(--rule);border-radius:12px;padding:4px;margin-bottom:22px}
-.tab{flex:1;padding:10px;border:none;background:transparent;border-radius:9px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s;text-align:center}
-.tab:hover{color:var(--ink2)}
-.tab.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(28,26,22,.10);border:1.5px solid var(--rule)}
-.view{display:none}.view.active{display:block}
+/* ── MAIN ── */
+.main{
+  flex:1;display:grid;
+  grid-template-columns:220px 1fr;
+  overflow:hidden;min-height:0;
+  position:relative;z-index:5;
+}
 
-/* Slider rows */
-.sliders{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
-.sl-row{display:flex;align-items:center;gap:10px}
-.sl-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);min-width:150px;white-space:nowrap}
-.sl-row input[type=range]{flex:1;height:5px;cursor:pointer;border-radius:3px}
-.sl-val{font-family:var(--mono);font-size:14px;font-weight:800;min-width:48px;text-align:right}
+/* ── LEFT: CONTROLS ── */
+.left{
+  border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;
+  background:var(--parch2);
+  overflow:hidden;
+}
+.views{flex:1;overflow:hidden}
+.vw{display:none;flex-direction:column;height:100%}
+.vw.active{display:flex}
 
-/* Checkbox row */
-.cb-row{display:flex;align-items:center;gap:10px;padding:6px 0}
-.cb-row input[type=checkbox]{width:17px;height:17px;cursor:pointer;flex-shrink:0}
-.cb-row label{font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer}
+.lp{padding:12px 14px;border-bottom:1px solid var(--rule2);flex-shrink:0}
+.lp-lbl{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
 
-/* Layout */
-.main-layout{display:grid;grid-template-columns:1fr 230px;gap:16px;align-items:start}
-@media(max-width:580px){.main-layout{grid-template-columns:1fr}}
+/* concept */
+.concept-text{
+  font-family:var(--serif);font-style:italic;font-size:12px;
+  color:var(--ink3);line-height:1.65;
+  border-left:2px solid var(--gold);padding-left:8px;
+}
+.concept-text strong{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--gold)}
 
-/* Canvas */
-.canvas-wrap{background:var(--paper2);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden}
-canvas{display:block;width:100%}
+/* slider */
+.sl-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sl-row:last-child{margin-bottom:0}
+.sl-label{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);min-width:80px}
+input[type=range]{
+  flex:1;height:3px;-webkit-appearance:none;
+  background:var(--rule);border-radius:2px;outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+  background:var(--ink);cursor:pointer;transition:box-shadow .12s;
+}
+.sl-val{font-size:14px;font-weight:700;font-family:var(--mono);color:var(--ink);min-width:38px;text-align:right}
 
-/* Info panel */
-.info-panel{display:flex;flex-direction:column;gap:8px}
-.info-card{background:#fff;border:1.5px solid var(--rule);border-radius:9px;padding:11px 13px}
-.ic-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:7px}
-.ic-row{display:flex;align-items:baseline;justify-content:space-between;gap:6px;padding:4px 0;border-bottom:1px solid var(--rule);font-size:12.5px}
-.ic-row:last-child{border-bottom:none;padding-bottom:0}
-.ic-key{color:var(--ink2);font-weight:600;font-family:var(--mono);font-size:12px}
-.ic-val{font-family:var(--mono);font-weight:800;font-size:13px;color:var(--ink)}
+/* checkbox */
+.cb-row{display:flex;align-items:center;gap:7px;padding:8px 0 0}
+.cb-row input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--teal)}
+.cb-row label{font-size:11px;color:var(--ink2);cursor:pointer;line-height:1.3}
 
-/* Insight */
-.insight{background:var(--gold-bg);border:1px solid #e0c080;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 15px;font-size:13px;color:#6b4400;line-height:1.65;margin-top:16px}
-.insight strong{color:#4a2e00}
-.insight code{font-family:var(--mono);font-weight:700;background:rgba(192,128,48,.15);padding:1px 5px;border-radius:4px;font-size:12px}
+/* info cards */
+.info-area{flex:1;overflow-y:auto;padding:10px 12px;scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.info-card{
+  background:var(--parch);border:1px solid var(--rule2);
+  padding:8px 10px;margin-bottom:6px;
+}
+.ic-lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.ic-row{display:flex;justify-content:space-between;align-items:baseline;
+  padding:3px 0;border-bottom:1px solid var(--rule2);font-size:11px}
+.ic-row:last-child{border-bottom:none}
+.ic-key{color:var(--ink3)}
+.ic-val{font-weight:700;color:var(--ink);font-family:var(--mono)}
+
+/* insight */
+.insight{
+  padding:10px 12px;border-top:1px solid var(--rule2);
+  font-size:10px;color:var(--ink3);line-height:1.65;font-style:italic;
+  font-family:var(--serif);flex-shrink:0;
+}
+.insight strong{font-style:normal;color:var(--ink);font-family:var(--mono);font-size:9px}
+
+/* ── RIGHT: CANVAS ── */
+.right{
+  display:flex;flex-direction:column;background:var(--parch);overflow:hidden;
+}
+.canvas-wrap{flex:1;overflow:hidden;position:relative}
+canvas{display:block;width:100%;height:100%}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="header">
-    <div class="chapter-badge"><div class="badge-num">4</div>Chapter 4 · Quadrilaterals</div>
-    <h1>Rhombus, Kite & Trapezium</h1>
-    <p class="header-sub">Adjust the sliders and watch the diagonals, angles, and parallel sides respond to each shape's rules. The constraints are built in — you can't break them.</p>
+
+<div class="top">
+  <div class="top-left">
+    <div class="top-ch">Ch·04 · Quadrilaterals</div>
+    <div class="top-title">Special Shapes</div>
+  </div>
+  <div class="top-tabs">
+    <button class="ttab active" data-t="0">Rhombus</button>
+    <button class="ttab" data-t="1">Kite</button>
+    <button class="ttab" data-t="2">Trapezium</button>
+  </div>
+  <div class="top-right">
+    <div class="tr-lbl" id="tr-lbl">Shape</div>
+    <div class="tr-val" id="tr-val">Rhombus</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="left">
+    <div class="views">
+
+      <!-- RHOMBUS -->
+      <div class="vw active" id="vw0">
+        <div class="lp">
+          <div class="lp-lbl">Concept</div>
+          <div class="concept-text">All four sides equal. Diagonals bisect each other at <strong>exactly 90°</strong>. Try ∠A = 90° — it becomes a square.</div>
+        </div>
+        <div class="lp">
+          <div class="lp-lbl">Controls</div>
+          <div class="sl-row">
+            <span class="sl-label">Side</span>
+            <input type="range" id="rSide" min="50" max="140" value="100" oninput="renderRhombus()">
+            <span class="sl-val" id="rSideV">100</span>
+          </div>
+          <div class="sl-row">
+            <span class="sl-label">Angle ∠A</span>
+            <input type="range" id="rAng" min="20" max="160" value="60" oninput="renderRhombus()">
+            <span class="sl-val" id="rAngV">60°</span>
+          </div>
+        </div>
+        <div class="info-area" id="rInfo"></div>
+        <div class="insight">All four sides = <strong>one value</strong>. ∠C = ∠A, ∠B = ∠D = 180°−∠A. Diagonals always cross at <strong>90°</strong>.</div>
+      </div>
+
+      <!-- KITE -->
+      <div class="vw" id="vw1">
+        <div class="lp">
+          <div class="lp-lbl">Concept</div>
+          <div class="concept-text">AB = AD and CB = CD. Main diagonal AC is a line of symmetry — bisects BD at <strong>90°</strong>. ∠B always equals ∠D.</div>
+        </div>
+        <div class="lp">
+          <div class="lp-lbl">Controls</div>
+          <div class="sl-row">
+            <span class="sl-label">AB = AD</span>
+            <input type="range" id="kTop" min="40" max="130" value="80" oninput="renderKite()">
+            <span class="sl-val" id="kTopV">80</span>
+          </div>
+          <div class="sl-row">
+            <span class="sl-label">CB = CD</span>
+            <input type="range" id="kBot" min="50" max="160" value="120" oninput="renderKite()">
+            <span class="sl-val" id="kBotV">120</span>
+          </div>
+          <div class="sl-row">
+            <span class="sl-label">Half-width</span>
+            <input type="range" id="kW" min="20" max="110" value="55" oninput="renderKite()">
+            <span class="sl-val" id="kWV">55</span>
+          </div>
+        </div>
+        <div class="info-area" id="kInfo"></div>
+        <div class="insight">The <strong>90° crossing</strong> is always preserved. Widen the kite — diagonals stay perpendicular.</div>
+      </div>
+
+      <!-- TRAPEZIUM -->
+      <div class="vw" id="vw2">
+        <div class="lp">
+          <div class="lp-lbl">Concept</div>
+          <div class="concept-text">PQ ∥ SR. Co-interior angles on same side always sum to <strong>180°</strong>: ∠P+∠S = 180°, ∠Q+∠R = 180°.</div>
+        </div>
+        <div class="lp">
+          <div class="lp-lbl">Controls</div>
+          <div class="sl-row">
+            <span class="sl-label">Top PQ</span>
+            <input type="range" id="tTop" min="40" max="160" value="100" oninput="renderTrap()">
+            <span class="sl-val" id="tTopV">100</span>
+          </div>
+          <div class="sl-row">
+            <span class="sl-label">Bottom SR</span>
+            <input type="range" id="tBot" min="80" max="220" value="180" oninput="renderTrap()">
+            <span class="sl-val" id="tBotV">180</span>
+          </div>
+          <div class="sl-row">
+            <span class="sl-label">Angle ∠S</span>
+            <input type="range" id="tAng" min="30" max="150" value="70" oninput="renderTrap()">
+            <span class="sl-val" id="tAngV">70°</span>
+          </div>
+          <div class="cb-row">
+            <input type="checkbox" id="tIso" onchange="renderTrap()">
+            <label for="tIso">Isosceles (SP = QR)</label>
+          </div>
+        </div>
+        <div class="info-area" id="tInfo"></div>
+        <div class="insight">∠P + ∠S is always <strong>exactly 180°</strong> — the co-interior angle rule for parallel lines.</div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="card">
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab(0)">Rhombus</button>
-      <button class="tab" onclick="switchTab(1)">Kite</button>
-      <button class="tab" onclick="switchTab(2)">Trapezium</button>
-    </div>
-
-    <!-- ══ RHOMBUS ══ -->
-    <div class="view active" id="v0">
-      <div class="concept"><strong>Rhombus:</strong> all four sides equal. The diagonals bisect each other at exactly 90° and each bisects its vertex angles. It is a parallelogram — so opposite angles are equal and adjacent angles sum to 180°.</div>
-      <div class="sliders">
-        <div class="sl-row">
-          <span class="sl-label">Side length</span>
-          <input type="range" id="rSide" min="50" max="140" value="100" style="accent-color:var(--rust)" oninput="renderRhombus()">
-          <span class="sl-val" style="color:var(--rust)" id="rSideV">100</span>
-        </div>
-        <div class="sl-row">
-          <span class="sl-label">Angle ∠A</span>
-          <input type="range" id="rAng" min="20" max="160" value="60" style="accent-color:var(--gold)" oninput="renderRhombus()">
-          <span class="sl-val" style="color:var(--gold)" id="rAngV">60°</span>
-        </div>
-      </div>
-      <div class="main-layout">
-        <div class="canvas-wrap"><canvas id="rCvs" height="300"></canvas></div>
-        <div class="info-panel" id="rInfo"></div>
-      </div>
-      <div class="insight">All four sides = <strong>one slider</strong>. Angle ∠A sets everything: ∠C = ∠A, ∠B = ∠D = 180° − ∠A. The diagonals always cross at <strong>90°</strong> — try making ∠A = 90° and the rhombus becomes a square.</div>
-    </div>
-
-    <!-- ══ KITE ══ -->
-    <div class="view" id="v1">
-      <div class="concept"><strong>Kite:</strong> two pairs of adjacent sides equal (AB = AD, CB = CD). The main diagonal AC is a line of symmetry — it bisects BD at 90° and bisects the angles at A and C. One pair of opposite angles (∠B = ∠D) are equal.</div>
-      <div class="sliders">
-        <div class="sl-row">
-          <span class="sl-label">AB = AD (top)</span>
-          <input type="range" id="kTop" min="40" max="130" value="80" style="accent-color:var(--violet)" oninput="renderKite()">
-          <span class="sl-val" style="color:var(--violet)" id="kTopV">80</span>
-        </div>
-        <div class="sl-row">
-          <span class="sl-label">CB = CD (bottom)</span>
-          <input type="range" id="kBot" min="50" max="160" value="120" style="accent-color:var(--violet)" oninput="renderKite()">
-          <span class="sl-val" style="color:var(--violet)" id="kBotV">120</span>
-        </div>
-        <div class="sl-row">
-          <span class="sl-label">Half-width at A</span>
-          <input type="range" id="kW" min="20" max="110" value="55" style="accent-color:var(--gold)" oninput="renderKite()">
-          <span class="sl-val" style="color:var(--gold)" id="kWV">55</span>
-        </div>
-      </div>
-      <div class="main-layout">
-        <div class="canvas-wrap"><canvas id="kCvs" height="300"></canvas></div>
-        <div class="info-panel" id="kInfo"></div>
-      </div>
-      <div class="insight">Drag the half-width to see the kite widen and narrow. The <strong>90° crossing</strong> of the diagonals is always preserved — that's the kite's defining diagonal property. Notice ∠B always equals ∠D.</div>
-    </div>
-
-    <!-- ══ TRAPEZIUM ══ -->
-    <div class="view" id="v2">
-      <div class="concept"><strong>Trapezium:</strong> at least one pair of parallel sides (PQ ∥ SR). Co-interior angles on the same side always add to 180°: ∠P + ∠S = 180° and ∠Q + ∠R = 180°. In an isosceles trapezium the legs are equal and base angles are equal.</div>
-      <div class="sliders">
-        <div class="sl-row">
-          <span class="sl-label">Top PQ</span>
-          <input type="range" id="tTop" min="40" max="160" value="100" style="accent-color:var(--teal)" oninput="renderTrap()">
-          <span class="sl-val" style="color:var(--teal)" id="tTopV">100</span>
-        </div>
-        <div class="sl-row">
-          <span class="sl-label">Bottom SR</span>
-          <input type="range" id="tBot" min="80" max="220" value="180" style="accent-color:var(--teal)" oninput="renderTrap()">
-          <span class="sl-val" style="color:var(--teal)" id="tBotV">180</span>
-        </div>
-        <div class="sl-row">
-          <span class="sl-label">Base angle ∠S</span>
-          <input type="range" id="tAng" min="30" max="150" value="70" style="accent-color:var(--gold)" oninput="renderTrap()">
-          <span class="sl-val" style="color:var(--gold)" id="tAngV">70°</span>
-        </div>
-        <div class="cb-row">
-          <input type="checkbox" id="tIso" style="accent-color:var(--sage)" onchange="renderTrap()">
-          <label for="tIso">Isosceles (SP = QR, base angles equal)</label>
-        </div>
-      </div>
-      <div class="main-layout">
-        <div class="canvas-wrap"><canvas id="tCvs" height="300"></canvas></div>
-        <div class="info-panel" id="tInfo"></div>
-      </div>
-      <div class="insight">Notice that ∠P + ∠S is always <strong>exactly 180°</strong> no matter how you move the sliders — that's the co-interior angle rule for parallel lines. Tick isosceles and watch both legs become equal and both pairs of base angles equalise.</div>
+  <div class="right">
+    <div class="canvas-wrap" id="canvas-wrap">
+      <canvas id="cvs"></canvas>
     </div>
   </div>
 </div>
 
 <script>
-const DEG = Math.PI / 180;
-const PR  = Math.min(window.devicePixelRatio||1, 2);
+const DEG=Math.PI/180;
+const PR=Math.min(window.devicePixelRatio||1,2);
+let activeTab=0;
 
-let activeTab = 0;
-function switchTab(i){
-  activeTab = i;
-  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',j===i));
-  document.querySelectorAll('.view').forEach((v,j)=>v.classList.toggle('active',j===i));
-  if(i===0) renderRhombus();
-  if(i===1) renderKite();
-  if(i===2) renderTrap();
+// Tab switching
+document.querySelectorAll('.ttab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.ttab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    activeTab=+tab.dataset.t;
+    document.querySelectorAll('.vw').forEach((v,i)=>v.classList.toggle('active',i===activeTab));
+    if(activeTab===0)renderRhombus();
+    if(activeTab===1)renderKite();
+    if(activeTab===2)renderTrap();
+  });
+});
+
+// Canvas setup
+function setupCanvas(){
+  const wrap=document.getElementById('canvas-wrap');
+  const cvs=document.getElementById('cvs');
+  const W=wrap.clientWidth,H=wrap.clientHeight;
+  cvs.width=W*PR;cvs.height=H*PR;
+  cvs.style.width=W+'px';cvs.style.height=H+'px';
+  const ctx=cvs.getContext('2d');
+  ctx.resetTransform();ctx.scale(PR,PR);
+  ctx.fillStyle='#f0e8d0';ctx.fillRect(0,0,W,H);
+  // dot grid
+  ctx.fillStyle='rgba(160,130,80,.18)';
+  for(let x=20;x<W;x+=20)for(let y=20;y<H;y+=20){
+    ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();
+  }
+  return{ctx,W,H};
 }
 
-// ── Shared canvas setup ──────────────────────────────
-function setupCanvas(id, H){
-  const cvs = document.getElementById(id);
-  const W   = cvs.parentElement.clientWidth;
-  cvs.width  = W * PR; cvs.height = H * PR;
-  cvs.style.width  = W + 'px';
-  cvs.style.height = H + 'px';
-  const ctx = cvs.getContext('2d');
-  ctx.resetTransform(); ctx.scale(PR, PR);
-  // Warm cream + dot grid
-  ctx.fillStyle = '#f3f0ea'; ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = 'rgba(180,170,158,.2)';
-  for(let gx=20;gx<W;gx+=20)
-    for(let gy=20;gy<H;gy+=20){
-      ctx.beginPath();ctx.arc(gx,gy,1,0,Math.PI*2);ctx.fill();
-    }
-  return {ctx, W, H};
+function vtx(ctx,x,y,col,lbl,dx,dy){
+  ctx.beginPath();ctx.arc(x,y,7,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+  ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);ctx.fillStyle='#f5eedc';ctx.fill();
+  ctx.font='bold 13px Instrument Serif,serif';
+  ctx.fillStyle=col;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(lbl,x+dx,y+dy);
 }
 
-function vertex(ctx, x, y, col, label, dx, dy){
-  ctx.beginPath(); ctx.arc(x,y,7,0,Math.PI*2);
-  ctx.fillStyle=col; ctx.fill();
-  ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
-  ctx.fillStyle='#fff'; ctx.fill();
-  ctx.font='bold 13px DM Sans,sans-serif';
-  ctx.fillStyle=col; ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText(label, x+dx, y+dy);
+function angArc(ctx,vx,vy,ang,lbl,col){
+  ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=1.5;
+  ctx.arc(vx,vy,22,ang-30*DEG,ang+30*DEG);ctx.stroke();
+  ctx.font='bold 10px Space Mono,monospace';
+  ctx.fillStyle=col;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(lbl,vx+40*Math.cos(ang),vy+40*Math.sin(ang));
 }
 
-function angleArc(ctx, vx, vy, ang, label, col){
-  ctx.beginPath(); ctx.strokeStyle=col; ctx.lineWidth=1.5;
-  ctx.arc(vx,vy,22, ang-30*DEG, ang+30*DEG); ctx.stroke();
-  ctx.font='bold 10px DM Mono,monospace';
-  ctx.fillStyle=col; ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText(label, vx+38*Math.cos(ang), vy+38*Math.sin(ang));
-}
-
-function rightAngleBox(ctx, ox, oy, dir, col){
+function raBox(ctx,ox,oy,dx,dy,col){
   const s=8;
-  const dx = dir==='r'?s:dir==='l'?-s:0;
-  const dy = dir==='u'?-s:dir==='d'?s:0;
-  ctx.strokeStyle=col||'rgba(100,90,80,.6)'; ctx.lineWidth=1.5;
-  ctx.beginPath();
-  ctx.moveTo(ox+dx, oy); ctx.lineTo(ox+dx, oy+dy); ctx.lineTo(ox, oy+dy);
-  ctx.stroke();
+  ctx.strokeStyle=col||'rgba(100,90,70,.6)';ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(ox+dx,oy);ctx.lineTo(ox+dx,oy+dy);ctx.lineTo(ox,oy+dy);ctx.stroke();
 }
 
-function tickMark(ctx, p1, p2, col, n){
-  const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
-  const dx=p2.x-p1.x, dy=p2.y-p1.y, l=Math.sqrt(dx*dx+dy*dy);
-  const nx=-dy/l*6, ny=dx/l*6, ux=dx/l, uy=dy/l;
-  ctx.strokeStyle=col; ctx.lineWidth=2;
+function tick(ctx,p1,p2,col,n){
+  const mx=(p1.x+p2.x)/2,my=(p1.y+p2.y)/2;
+  const dx=p2.x-p1.x,dy=p2.y-p1.y,l=Math.hypot(dx,dy)||1;
+  const nx=-dy/l*6,ny=dx/l*6,ux=dx/l,uy=dy/l;
+  ctx.strokeStyle=col;ctx.lineWidth=2;
   for(let k=0;k<n;k++){
     const o=(k-(n-1)/2)*5;
-    ctx.beginPath();
-    ctx.moveTo(mx+ux*o-nx, my+uy*o-ny);
-    ctx.lineTo(mx+ux*o+nx, my+uy*o+ny);
-    ctx.stroke();
+    ctx.beginPath();ctx.moveTo(mx+ux*o-nx,my+uy*o-ny);ctx.lineTo(mx+ux*o+nx,my+uy*o+ny);ctx.stroke();
   }
 }
 
-function infoCard(label, rows){
-  return `<div class="info-card"><div class="ic-lbl">${label}</div>${rows.map(([k,v])=>`<div class="ic-row"><span class="ic-key">${k}</span><span class="ic-val">${v}</span></div>`).join('')}</div>`;
+function infoHTML(lbl,rows){
+  return`<div class="info-card"><div class="ic-lbl">${lbl}</div>${rows.map(([k,v])=>`<div class="ic-row"><span class="ic-key">${k}</span><span class="ic-val">${v}</span></div>`).join('')}</div>`;
 }
 
-// ══ RHOMBUS ══════════════════════════════════════════
+// ── RHOMBUS ──────────────────────────────────────────
 function renderRhombus(){
-  const side = +document.getElementById('rSide').value;
-  const angA = +document.getElementById('rAng').value;
-  document.getElementById('rSideV').textContent = side;
-  document.getElementById('rAngV').textContent  = angA + '°';
-  const angB = 180 - angA;
+  const side=+document.getElementById('rSide').value;
+  const angA=+document.getElementById('rAng').value;
+  document.getElementById('rSideV').textContent=side;
+  document.getElementById('rAngV').textContent=angA+'°';
+  const angB=180-angA;
+  const isSquare=Math.abs(angA-90)<3;
+  document.getElementById('tr-lbl').textContent='Shape';
+  document.getElementById('tr-val').textContent=isSquare?'Square':'Rhombus';
 
-  // Diagonals: d1 = 2*side*sin(angA/2), d2 = 2*side*cos(angA/2)
-  const d1 = 2 * side * Math.sin(angA/2 * DEG);  // shorter if angA<90
-  const d2 = 2 * side * Math.cos(angA/2 * DEG);
+  const d1=2*side*Math.sin(angA/2*DEG);
+  const d2=2*side*Math.cos(angA/2*DEG);
+  const {ctx,W,H}=setupCanvas();
+  const cx=W/2,cy=H/2;
+  const A={x:cx,y:cy-d2/2},B={x:cx+d1/2,y:cy},C={x:cx,y:cy+d2/2},D={x:cx-d1/2,y:cy};
 
-  const {ctx, W, H} = setupCanvas('rCvs', 300);
-  const cx = W/2, cy = H/2;
-  const A={x:cx,     y:cy-d2/2};
-  const B={x:cx+d1/2,y:cy};
-  const C={x:cx,     y:cy+d2/2};
-  const D={x:cx-d1/2,y:cy};
-
-  // Diagonals (dashed)
-  ctx.setLineDash([5,4]); ctx.strokeStyle='rgba(140,130,118,.5)'; ctx.lineWidth=1.5;
-  ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(C.x,C.y); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(B.x,B.y); ctx.lineTo(D.x,D.y); ctx.stroke();
+  ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(120,100,60,.4)';ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(C.x,C.y);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(B.x,B.y);ctx.lineTo(D.x,D.y);ctx.stroke();
   ctx.setLineDash([]);
+  raBox(ctx,cx,cy,8,-8);
 
-  // Right-angle box at centre
-  rightAngleBox(ctx, cx, cy, 'r', 'rgba(100,90,80,.6)');
-
-  // Shape fill + outline
   ctx.beginPath();
-  ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.lineTo(C.x,C.y); ctx.lineTo(D.x,D.y);
-  ctx.closePath();
-  ctx.fillStyle='rgba(184,74,42,.10)'; ctx.fill();
-  ctx.strokeStyle='var(--rust,#b84a2a)'; ctx.lineWidth=2.5; ctx.stroke();
+  ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.lineTo(D.x,D.y);ctx.closePath();
+  ctx.fillStyle=isSquare?'rgba(26,106,96,.12)':'rgba(184,64,32,.09)';ctx.fill();
+  ctx.strokeStyle=isSquare?'#1a6a60':'#b84020';ctx.lineWidth=2.5;ctx.stroke();
 
-  // Equal side tick marks
-  [[A,B],[B,C],[C,D],[D,A]].forEach(([p,q])=>tickMark(ctx,p,q,'#b84a2a',1));
+  const col=isSquare?'#1a6a60':'#b84020';
+  [[A,B],[B,C],[C,D],[D,A]].forEach(([p,q])=>tick(ctx,p,q,col,1));
 
-  // Angle arcs
-  angleArc(ctx, A.x, A.y, 90*DEG, angA+'°', '#c08030');
-  angleArc(ctx, B.x, B.y, 180*DEG, angB+'°', '#c08030');
-  angleArc(ctx, C.x, C.y, 270*DEG, angA+'°', '#c08030');
-  angleArc(ctx, D.x, D.y, 0, angB+'°', '#c08030');
+  angArc(ctx,A.x,A.y,90*DEG,angA+'°','#b87820');
+  angArc(ctx,B.x,B.y,180*DEG,angB+'°','#b87820');
+  angArc(ctx,C.x,C.y,270*DEG,angA+'°','#b87820');
+  angArc(ctx,D.x,D.y,0,angB+'°','#b87820');
 
-  // Vertex labels
-  vertex(ctx, A.x, A.y, '#b84a2a', 'A', 0, -18);
-  vertex(ctx, B.x, B.y, '#b84a2a', 'B', 18, 0);
-  vertex(ctx, C.x, C.y, '#b84a2a', 'C', 0, 18);
-  vertex(ctx, D.x, D.y, '#b84a2a', 'D', -18, 0);
+  vtx(ctx,A.x,A.y,col,'A',0,-18);vtx(ctx,B.x,B.y,col,'B',18,0);
+  vtx(ctx,C.x,C.y,col,'C',0,18);vtx(ctx,D.x,D.y,col,'D',-18,0);
 
-  // Diagonal length labels
-  ctx.font='bold 10px DM Mono,monospace'; ctx.fillStyle='rgba(100,90,80,.7)';
-  ctx.textAlign='left'; ctx.textBaseline='middle';
-  ctx.fillText('d₁=' + d1.toFixed(1), cx+8, cy-d2/4);
-  ctx.textAlign='center'; ctx.textBaseline='top';
-  ctx.fillText('d₂=' + d2.toFixed(1), cx-d1/4-20, cy+4);
+  ctx.font='bold 9px Space Mono,monospace';ctx.fillStyle='rgba(100,80,40,.6)';
+  ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText('d₁='+d1.toFixed(1),cx+6,cy-d2/4);
+  ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText('d₂='+d2.toFixed(1),cx-d1/4-20,cy+4);
 
-  // Info panel
-  document.getElementById('rInfo').innerHTML =
-    infoCard('Angles', [
-      ['∠A = ∠C', angA+'°'],
-      ['∠B = ∠D', angB+'°'],
-      ['∠A + ∠B', '180° ✓'],
-    ]) +
-    infoCard('Sides', [
-      ['All four', side + ' u'],
-    ]) +
-    infoCard('Diagonals', [
-      ['d₁', d1.toFixed(1)+' u'],
-      ['d₂', d2.toFixed(1)+' u'],
-      ['Cross at', '90° ✓'],
-      ['Bisect each other', '✓'],
-    ]);
+  // If square, note it
+  if(isSquare){
+    ctx.font='italic 11px Instrument Serif,serif';ctx.fillStyle='#1a6a60';
+    ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText('∠A = 90° → Square!',cx,8);
+  }
+
+  document.getElementById('rInfo').innerHTML=
+    infoHTML('Angles',[['∠A = ∠C',angA+'°'],['∠B = ∠D',angB+'°'],['∠A + ∠B','180° ✓']])+
+    infoHTML('Sides',[['All four',side+' u']])+
+    infoHTML('Diagonals',[['d₁',d1.toFixed(1)+' u'],['d₂',d2.toFixed(1)+' u'],['Cross at','90° ✓'],['Bisect each other','✓']]);
 }
 
-// ══ KITE ════════════════════════════════════════════
+// ── KITE ─────────────────────────────────────────────
 function renderKite(){
-  const top = +document.getElementById('kTop').value;  // AB = AD
-  const bot = +document.getElementById('kBot').value;  // CB = CD
-  const hw  = +document.getElementById('kW').value;    // half-width at widest point
-  document.getElementById('kTopV').textContent = top;
-  document.getElementById('kBotV').textContent = bot;
-  document.getElementById('kWV').textContent   = hw;
+  const top=+document.getElementById('kTop').value;
+  const bot=+document.getElementById('kBot').value;
+  const hw=+document.getElementById('kW').value;
+  document.getElementById('kTopV').textContent=top;
+  document.getElementById('kBotV').textContent=bot;
+  document.getElementById('kWV').textContent=hw;
+  document.getElementById('tr-val').textContent='Kite';
 
-  // Kite geometry: A at top, C at bottom, B right, D left
-  // hw = half-width of B,D  (capped by top and bot)
-  const hwCap = Math.min(hw, top-1, bot-1);
-  const h1 = Math.sqrt(Math.max(0, top*top - hwCap*hwCap));  // dist A to BD
-  const h2 = Math.sqrt(Math.max(0, bot*bot - hwCap*hwCap));  // dist C to BD
+  const hwCap=Math.min(hw,top-1,bot-1);
+  const h1=Math.sqrt(Math.max(0,top*top-hwCap*hwCap));
+  const h2=Math.sqrt(Math.max(0,bot*bot-hwCap*hwCap));
 
-  const {ctx, W, H} = setupCanvas('kCvs', 320);
-  const cx = W/2;
-  const topPad = 24;
-  const A={x:cx,        y:topPad};
-  const B={x:cx+hwCap,  y:topPad+h1};
-  const C={x:cx,        y:topPad+h1+h2};
-  const D={x:cx-hwCap,  y:topPad+h1};
-  const midBD={x:cx, y:topPad+h1};
+  const {ctx,W,H}=setupCanvas();
+  const cx=W/2,topPad=24;
+  let A={x:cx,y:topPad},B={x:cx+hwCap,y:topPad+h1},C={x:cx,y:topPad+h1+h2},D={x:cx-hwCap,y:topPad+h1};
+  const mid={x:cx,y:topPad+h1};
+  const totalH=topPad+h1+h2+30;
+  const sc=totalH>H-10?(H-10)/totalH:1;
+  function s(p){return{x:cx+(p.x-cx)*sc,y:topPad+(p.y-topPad)*sc};}
+  const sA=s(A),sB=s(B),sC=s(C),sD=s(D),sM=s(mid);
 
-  // Scale down if too tall
-  const totalH = topPad + h1 + h2 + 30;
-  let scale = 1;
-  if(totalH > H-10) scale = (H-10)/totalH;
-
-  function sc(p){ return {x: cx + (p.x-cx)*scale, y: topPad + (p.y-topPad)*scale}; }
-  const sA=sc(A), sB=sc(B), sC=sc(C), sD=sc(D), sMid=sc(midBD);
-
-  // Main diagonal AC (dashed)
-  ctx.setLineDash([5,4]); ctx.strokeStyle='rgba(140,130,118,.5)'; ctx.lineWidth=1.5;
-  ctx.beginPath(); ctx.moveTo(sA.x,sA.y); ctx.lineTo(sC.x,sC.y); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(sB.x,sB.y); ctx.lineTo(sD.x,sD.y); ctx.stroke();
+  ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(120,100,60,.4)';ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(sA.x,sA.y);ctx.lineTo(sC.x,sC.y);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(sB.x,sB.y);ctx.lineTo(sD.x,sD.y);ctx.stroke();
   ctx.setLineDash([]);
+  raBox(ctx,sM.x,sM.y,8,0);
 
-  // Right angle at midBD
-  rightAngleBox(ctx, sMid.x, sMid.y, 'r', 'rgba(100,90,80,.6)');
+  ctx.beginPath();ctx.moveTo(sA.x,sA.y);ctx.lineTo(sB.x,sB.y);ctx.lineTo(sC.x,sC.y);ctx.lineTo(sD.x,sD.y);ctx.closePath();
+  ctx.fillStyle='rgba(106,56,136,.09)';ctx.fill();
+  ctx.strokeStyle='#6a3888';ctx.lineWidth=2.5;ctx.stroke();
 
-  // Shape
-  ctx.beginPath();
-  ctx.moveTo(sA.x,sA.y); ctx.lineTo(sB.x,sB.y); ctx.lineTo(sC.x,sC.y); ctx.lineTo(sD.x,sD.y);
-  ctx.closePath();
-  ctx.fillStyle='rgba(106,74,144,.10)'; ctx.fill();
-  ctx.strokeStyle='#6a4a90'; ctx.lineWidth=2.5; ctx.stroke();
+  tick(ctx,sA,sB,'#6a3888',1);tick(ctx,sA,sD,'#6a3888',1);
+  tick(ctx,sC,sB,'#6a3888',2);tick(ctx,sC,sD,'#6a3888',2);
 
-  // Tick marks (AB=AD, CB=CD)
-  tickMark(ctx,sA,sB,'#6a4a90',1); tickMark(ctx,sA,sD,'#6a4a90',1);
-  tickMark(ctx,sC,sB,'#6a4a90',2); tickMark(ctx,sC,sD,'#6a4a90',2);
+  const angA=Math.round(2*Math.atan2(hwCap,h1)/DEG);
+  const angC=Math.round(2*Math.atan2(hwCap,h2)/DEG);
+  const angB=Math.round((360-angA-angC)/2);
 
-  // Angles
-  const angA = Math.round(2 * Math.atan2(hwCap, h1) / DEG);
-  const angC = Math.round(2 * Math.atan2(hwCap, h2) / DEG);
-  const angB = Math.round((360 - angA - angC) / 2);
+  angArc(ctx,sA.x,sA.y,90*DEG,angA+'°','#b87820');
+  angArc(ctx,sC.x,sC.y,270*DEG,angC+'°','#b87820');
+  angArc(ctx,sB.x,sB.y,180*DEG,angB+'°','#2a6030');
+  angArc(ctx,sD.x,sD.y,0,angB+'°','#2a6030');
 
-  angleArc(ctx, sA.x, sA.y, 90*DEG, angA+'°', '#c08030');
-  angleArc(ctx, sC.x, sC.y, 270*DEG, angC+'°', '#c08030');
-  angleArc(ctx, sB.x, sB.y, 180*DEG, angB+'°', '#3a6a48');
-  angleArc(ctx, sD.x, sD.y, 0, angB+'°', '#3a6a48');
+  vtx(ctx,sA.x,sA.y,'#6a3888','A',0,-18);vtx(ctx,sB.x,sB.y,'#6a3888','B',18,0);
+  vtx(ctx,sC.x,sC.y,'#6a3888','C',0,18);vtx(ctx,sD.x,sD.y,'#6a3888','D',-18,0);
 
-  // Vertices
-  vertex(ctx, sA.x, sA.y, '#6a4a90', 'A', 0, -18);
-  vertex(ctx, sB.x, sB.y, '#6a4a90', 'B', 18, 0);
-  vertex(ctx, sC.x, sC.y, '#6a4a90', 'C', 0, 18);
-  vertex(ctx, sD.x, sD.y, '#6a4a90', 'D', -18, 0);
-
-  document.getElementById('kInfo').innerHTML =
-    infoCard('Sides', [
-      ['AB = AD', top+' u'],
-      ['CB = CD', bot+' u'],
-    ]) +
-    infoCard('Angles', [
-      ['∠A', angA+'°'],
-      ['∠B = ∠D', angB+'°'],
-      ['∠C', angC+'°'],
-      ['Sum', (angA+angC+angB*2)+'° ✓'],
-    ]) +
-    infoCard('Diagonals', [
-      ['AC bisects BD', '✓'],
-      ['Cross at', '90° ✓'],
-    ]);
+  document.getElementById('kInfo').innerHTML=
+    infoHTML('Sides',[['AB = AD',top+' u'],['CB = CD',bot+' u']])+
+    infoHTML('Angles',[['∠A',angA+'°'],['∠B = ∠D',angB+'°'],['∠C',angC+'°'],['Sum',(angA+angC+angB*2)+'° ✓']])+
+    infoHTML('Diagonals',[['AC bisects BD','✓'],['Cross at','90° ✓']]);
 }
 
-// ══ TRAPEZIUM ═══════════════════════════════════════
+// ── TRAPEZIUM ─────────────────────────────────────────
 function renderTrap(){
-  const top  = +document.getElementById('tTop').value;
-  const bot  = +document.getElementById('tBot').value;
-  const angS = +document.getElementById('tAng').value;  // base angle at S
-  const iso  = document.getElementById('tIso').checked;
-  const angP = iso ? angS : angS;  // same if iso, else P = S for simplicity
-  const angR = 180 - (iso ? angS : 180 - angS);
-  const angQ = 180 - angS;
-  document.getElementById('tTopV').textContent = top;
-  document.getElementById('tBotV').textContent = bot;
-  document.getElementById('tAngV').textContent = angS+'°';
+  const top=+document.getElementById('tTop').value;
+  const bot=+document.getElementById('tBot').value;
+  const angS=+document.getElementById('tAng').value;
+  const iso=document.getElementById('tIso').checked;
+  document.getElementById('tTopV').textContent=top;
+  document.getElementById('tBotV').textContent=bot;
+  document.getElementById('tAngV').textContent=angS+'°';
+  document.getElementById('tr-val').textContent=iso?'Isosceles Trap.':'Trapezium';
 
-  const {ctx, W, H} = setupCanvas('tCvs', 300);
-  const h    = 110;
-  const bx   = (W - bot) / 2;
-  const by   = H - 50;
-  const offL = h / Math.tan(angS * DEG);
-  const offR = iso ? offL : h / Math.tan((180-angS) * DEG);
+  const {ctx,W,H}=setupCanvas();
+  const h=100,bx=(W-bot)/2,by=H-50;
+  const offL=h/Math.tan(angS*DEG);
+  const offR=iso?offL:h/Math.tan((180-angS)*DEG);
+  const S={x:bx,y:by},R={x:bx+bot,y:by};
+  const P={x:bx+offL,y:by-h};
+  const Q={x:iso?bx+bot-offL:bx+offL+top,y:by-h};
 
-  const S={x:bx,         y:by};
-  const R={x:bx+bot,      y:by};
-  const P={x:bx+offL,     y:by-h};
-  const Q={x:iso ? bx+bot-offL : bx+offL+top, y:by-h};
+  ctx.beginPath();ctx.moveTo(S.x,S.y);ctx.lineTo(R.x,R.y);ctx.lineTo(Q.x,Q.y);ctx.lineTo(P.x,P.y);ctx.closePath();
+  ctx.fillStyle='rgba(26,106,96,.09)';ctx.fill();
+  ctx.strokeStyle='#1a6a60';ctx.lineWidth=2.5;ctx.stroke();
 
-  // Parallel marks (chevrons on PQ and SR)
-  function parallelMark(p1,p2,col){
-    const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
-    const dx=p2.x-p1.x,dy=p2.y-p1.y,l=Math.sqrt(dx*dx+dy*dy);
-    const ux=dx/l,uy=dy/l;
-    [[-5,0],[0,5],[5,10]].forEach(([a])=>{
-      ctx.beginPath(); ctx.strokeStyle=col; ctx.lineWidth=2;
-      ctx.moveTo(mx+ux*(a-4)-uy*5, my+uy*(a-4)+ux*5);
-      ctx.lineTo(mx+ux*(a+4)-uy*5, my+uy*(a+4)+ux*5);
-      ctx.stroke();
-    });
-  }
+  // Parallel tick marks
+  tick(ctx,{x:(P.x+Q.x)/2-8,y:P.y},{x:(P.x+Q.x)/2+8,y:P.y},'#1a6a60',2);
+  tick(ctx,{x:(S.x+R.x)/2-8,y:S.y},{x:(S.x+R.x)/2+8,y:S.y},'#1a6a60',2);
+  if(iso){tick(ctx,S,P,'#2a6030',1);tick(ctx,R,Q,'#2a6030',1);}
 
-  // Shape
-  ctx.beginPath();
-  ctx.moveTo(S.x,S.y); ctx.lineTo(R.x,R.y); ctx.lineTo(Q.x,Q.y); ctx.lineTo(P.x,P.y);
-  ctx.closePath();
-  ctx.fillStyle='rgba(29,106,114,.10)'; ctx.fill();
-  ctx.strokeStyle='#1d6a72'; ctx.lineWidth=2.5; ctx.stroke();
+  // Height
+  ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(120,100,60,.4)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(P.x,P.y);ctx.lineTo(P.x,S.y);ctx.stroke();ctx.setLineDash([]);
+  raBox(ctx,P.x,S.y,8,0);
 
-  // Parallel marks on both parallel sides
-  const tickCol='#1d6a72';
-  tickMark(ctx,{x:(P.x+Q.x)/2-8,y:(P.y+Q.y)/2},{x:(P.x+Q.x)/2+8,y:(P.y+Q.y)/2},tickCol,2);
-  tickMark(ctx,{x:(S.x+R.x)/2-8,y:(S.y+R.y)/2},{x:(S.x+R.x)/2+8,y:(S.y+R.y)/2},tickCol,2);
+  const angQ=iso?angS:180-angS;
+  angArc(ctx,S.x,S.y,-80*DEG,angS+'°','#b87820');
+  angArc(ctx,R.x,R.y,260*DEG,angQ+'°','#b87820');
+  angArc(ctx,P.x,P.y,100*DEG,(180-angS)+'°','#b87820');
+  angArc(ctx,Q.x,Q.y,80*DEG,angS+'°','#b87820');
 
-  // Isosceles leg marks
-  if(iso){
-    tickMark(ctx,S,P,'#3a6a48',1);
-    tickMark(ctx,R,Q,'#3a6a48',1);
-  }
+  ctx.font='bold 9px Space Mono,monospace';ctx.fillStyle='#1a6a60';
+  ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText('PQ = '+top,(P.x+Q.x)/2,P.y-6);
+  ctx.textBaseline='top';ctx.fillText('SR = '+bot,(S.x+R.x)/2,S.y+6);
 
-  // Height line
-  ctx.setLineDash([4,3]); ctx.strokeStyle='rgba(140,130,118,.5)'; ctx.lineWidth=1.2;
-  ctx.beginPath(); ctx.moveTo(P.x,P.y); ctx.lineTo(P.x,S.y); ctx.stroke();
-  ctx.setLineDash([]);
-  rightAngleBox(ctx, P.x, S.y, 'r', 'rgba(100,90,80,.5)');
+  vtx(ctx,P.x,P.y,'#1a6a60','P',-16,0);vtx(ctx,Q.x,Q.y,'#1a6a60','Q',16,0);
+  vtx(ctx,R.x,R.y,'#1a6a60','R',14,0);vtx(ctx,S.x,S.y,'#1a6a60','S',-16,0);
 
-  // Angles
-  angleArc(ctx, S.x, S.y, -80*DEG, angS+'°', '#c08030');
-  angleArc(ctx, R.x, R.y, 260*DEG, angQ+'°', '#c08030');
-  angleArc(ctx, P.x, P.y, 100*DEG, (180-angS)+'°', '#c08030');
-  angleArc(ctx, Q.x, Q.y, 80*DEG, angS+'°', '#c08030');
-
-  // Labels — PQ on top, SR on bottom
-  ctx.font='bold 10px DM Mono,monospace';
-  ctx.fillStyle='#1d6a72'; ctx.textAlign='center'; ctx.textBaseline='bottom';
-  ctx.fillText('PQ = '+top, (P.x+Q.x)/2, P.y-6);
-  ctx.textBaseline='top';
-  ctx.fillText('SR = '+bot, (S.x+R.x)/2, S.y+6);
-
-  vertex(ctx, P.x,P.y,'#1d6a72','P',-16,0);
-  vertex(ctx, Q.x,Q.y,'#1d6a72','Q', 16,0);
-  vertex(ctx, R.x,R.y,'#1d6a72','R', 14,0);
-  vertex(ctx, S.x,S.y,'#1d6a72','S',-16,0);
-
-  const realAngQ = iso ? angS : 180-angS;
-  document.getElementById('tInfo').innerHTML =
-    infoCard('Parallel sides', [
-      ['PQ (top)',  top+' u'],
-      ['SR (bottom)', bot+' u'],
-    ]) +
-    infoCard('Angles', [
-      ['∠S', angS+'°'],
-      ['∠P', (180-angS)+'°'],
-      ['∠R', realAngQ+'°'],
-      ['∠Q', (180-realAngQ)+'°'],
-    ]) +
-    infoCard('Co-interior', [
-      ['∠S + ∠P', (angS+180-angS)+'° ✓'],
-      ['∠R + ∠Q', (realAngQ+180-realAngQ)+'° ✓'],
-    ]) +
-    (iso ? infoCard('Isosceles', [
-      ['SP = QR','✓'],
-      ['∠S = ∠R', angS+'°'],
-      ['∠P = ∠Q', (180-angS)+'°'],
-    ]) : '');
+  document.getElementById('tInfo').innerHTML=
+    infoHTML('Parallel sides',[['PQ (top)',top+' u'],['SR (bottom)',bot+' u']])+
+    infoHTML('Angles',[['∠S',angS+'°'],['∠P',(180-angS)+'°'],['∠R',angQ+'°'],['∠Q',(180-angQ)+'°']])+
+    infoHTML('Co-interior',[['∠S + ∠P','180° ✓'],['∠R + ∠Q','180° ✓']])+
+    (iso?infoHTML('Isosceles',[['SP = QR','✓'],['∠S = ∠R',angS+'°'],['∠P = ∠Q',(180-angS)+'°']]):'');
 }
 
+// Resize
 new ResizeObserver(()=>{
-  if(activeTab===0) renderRhombus();
-  if(activeTab===1) renderKite();
-  if(activeTab===2) renderTrap();
-}).observe(document.querySelector('.card'));
+  if(activeTab===0)renderRhombus();
+  if(activeTab===1)renderKite();
+  if(activeTab===2)renderTrap();
+}).observe(document.getElementById('canvas-wrap'));
 
 renderRhombus();
 </script>
